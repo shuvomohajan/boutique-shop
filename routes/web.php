@@ -72,13 +72,6 @@ Route::namespace('Admin')->prefix('dashboard')->middleware('auth')->group(functi
   Route::get('stock', 'ProductController@showStock')->name('stock.index');
   Route::post('stock/{id}', 'ProductController@updateStock')->name('stock.update');
 
-  /*Route::prefix('report')->name('report.')->group(function () {
-    Route::get('sale', [ReportController::class, 'saleReport'])->name('sale');
-    Route::get('purchase', [ReportController::class, 'purchaseReport'])->name('purchase');
-    Route::get('expense', [ReportController::class, 'expenseReport'])->name('expense');
-    Route::get('stock', [ReportController::class, 'stockReport'])->name('stock');
-  });*/
-
   //ajax
   Route::post('getSubcategory', 'ProductController@categorySubcategory')->name('load.subcategory');
 });

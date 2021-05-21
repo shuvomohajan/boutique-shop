@@ -170,7 +170,8 @@
                 <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. <br> Standard Resulation 940px X 720px (H x W). <br> Maximum size 512kb.</span>
               </div>
             </div>
-            <div class="form-group row">
+
+            {{--<div class="form-group row">
               <div class="col-lg-2"></div>
               <div class="col-lg-8">
                 <div>
@@ -193,7 +194,7 @@
                 @enderror
                 <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. <br> Standard Resulation 940px X 720px (H x W). <br> Maximum size 512kb.</span>
               </div>
-            </div>
+            </div>--}}
 
           </div>
           <div class="kt-portlet__foot">

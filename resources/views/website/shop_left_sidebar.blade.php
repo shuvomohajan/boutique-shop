@@ -182,7 +182,7 @@ $days = 7;
               </div>
             </div>
             @endif
-            <div class="sidebar-title-2">
+            {{-- <div class="sidebar-title-2">
               <h2>Languages</h2>
             </div>
             <div class="sidebar-categores-box sidebar-categores_list mt-sm-25 mt-xs-25">
@@ -197,7 +197,7 @@ $days = 7;
                   @endforeach
                 </ul>
               </div>
-            </div>
+            </div> --}}
             <div class="sidebar-title-2">
               <h2>Price</h2>
             </div>

@@ -8,7 +8,7 @@
         <!-- Begin FB's Single Product Slide Wrap Area -->
         <div class="col-lg-3">
           <div class="fb-section_title-2">
-            <h2>সর্বচো বিক্রি</h2>
+            <h2>Top Sales</h2>
           </div>
           <div class="fb-single-product-slide_wrap bg-white">
             <div class="fb-single-product_active owl-carousel">

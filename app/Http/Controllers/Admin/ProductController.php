@@ -45,12 +45,10 @@ class ProductController extends Controller
     $tags = Tag::where('status', 1)->get();
     $formats = Format::where('status', 1)->get();
     $languages = Language::where('status', 1)->get();
-    $authors = User::where('status', 1)->where('type', 'author')->get();
-    $publishers = User::where('status', 1)->where('type', 'publisher')->get();
     $features = Feature::where('status', 1)->get();
     $sku = '#' . chr(rand(65, 90)) . date('Y') . intval('0' . rand(1, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9));
 
-    return view('admin.product.create', compact('categories', 'subjects', 'tags', 'formats', 'languages', 'authors', 'publishers', 'features', 'sku'));
+    return view('admin.product.create', compact('categories', 'subjects', 'tags', 'formats', 'languages', 'features', 'sku'));
   }
 
   /**
@@ -77,15 +75,13 @@ class ProductController extends Controller
       'regular_price'     => 'required|integer',
       'sell_price'        => 'nullable|integer',
       'discount'          => 'nullable|integer',
-      'author_id'         => 'required|integer|exists:users,id',
-      'publisher_id'      => 'required|integer|exists:users,id',
       'category_id'       => 'required|array',
       'category_id.*'     => 'required|string',
       'subcategory_id'    => 'nullable|array',
       'subcategory_id.*'  => 'nullable|string',
       'subject_id'        => 'nullable|integer',
-      'format_id'         => 'required|integer',
-      'language_id'       => 'required|integer',
+      'format_id'         => 'nullable|integer',
+      'language_id'       => 'nullable|integer',
       'tag_id'            => 'nullable|array',
       'tag_id.*'          => 'nullable|string|distinct',
       'features'          => 'nullable|array',
@@ -108,7 +104,7 @@ class ProductController extends Controller
     }
 
     // dynamic subject entry
-    if (!Subject::find($request->input('subject_id'))) {
+    if ($request->input('subject_id') && !Subject::find($request->input('subject_id'))) {
       $newSubject = Subject::create([
         'name' => $request->input('subject_id'),
       ]);
@@ -116,7 +112,7 @@ class ProductController extends Controller
     }
 
     // dynamic format entry
-    if (!Format::find($request->input('format_id'))) {
+    if ($request->input('format_id') && !Format::find($request->input('format_id'))) {
       $newFormat = Format::create([
         'name' => $request->input('format_id'),
       ]);
@@ -124,7 +120,7 @@ class ProductController extends Controller
     }
 
     // dynamic language entry
-    if (!Language::find($request->input('language_id'))) {
+    if ($request->input('language_id') && !Language::find($request->input('language_id'))) {
       $newLanguage = Language::create([
         'name' => $request->input('language_id'),
       ]);
@@ -165,8 +161,6 @@ class ProductController extends Controller
       'format_id'         => $request->format_id,
       'language_id'       => $request->language_id,
       'subject_id'        => $request->subject_id,
-      'author_id'         => $request->input('author_id'),
-      'publisher_id'      => $request->input('publisher_id'),
       'sku'               => $request->input('sku'),
       'seo_key_word'      => rtrim($request->seo_key_word, ','),
     ]);
@@ -259,8 +253,6 @@ class ProductController extends Controller
     $tags = Tag::where('status', 1)->get();
     $formats = Format::where('status', 1)->get();
     $languages = Language::where('status', 1)->get();
-    $authors = User::where('status', 1)->where('type', 'author')->get();
-    $publishers = User::where('status', 1)->where('type', 'publisher')->get();
     $oldTags = ProductTag::where('product_id', $product->id)->pluck('tag_id');
     $features = Feature::where('status', 1)->get();
     $oldFeatures = FeatureProducts::where('product_id', $product->id)->pluck('feature_id');
@@ -268,7 +260,7 @@ class ProductController extends Controller
     $old_seo_key_word = collect(explode(',', $product->seo_key_word));
     $old_gallery = collect(explode(',', $product->gallery));
 
-    return view('admin.product.edit', compact('product', 'old_seo_key_word', 'old_gallery', 'categories', 'subjects', 'tags', 'oldTags', 'features', 'oldFeatures', 'formats', 'languages', 'authors', 'publishers'));
+    return view('admin.product.edit', compact('product', 'old_seo_key_word', 'old_gallery', 'categories', 'subjects', 'tags', 'oldTags', 'features', 'oldFeatures', 'formats', 'languages'));
   }
 
   /**
@@ -295,15 +287,13 @@ class ProductController extends Controller
       'regular_price'     => 'required|integer',
       'sell_price'        => 'nullable|integer',
       'discount'          => 'nullable|integer',
-      'author_id'         => 'required|integer|exists:users,id',
-      'publisher_id'      => 'required|integer|exists:users,id',
       'category_id'       => 'required|array',
       'category_id.*'     => 'required|string',
       'subcategory_id'    => 'nullable|array',
       'subcategory_id.*'  => 'nullable|string',
       'subject_id'        => 'nullable|integer',
-      'format_id'         => 'required|integer',
-      'language_id'       => 'required|integer',
+      'format_id'         => 'nullable|integer',
+      'language_id'       => 'nullable|integer',
       'tag_id'            => 'nullable|array',
       'tag_id.*'          => 'nullable|string|distinct',
       'features'          => 'nullable|array',
@@ -412,7 +402,7 @@ class ProductController extends Controller
     }
 
     // dynamic subject entry
-    if (!Subject::find($request->input('subject_id'))) {
+    if ($request->input('subject_id') && !Subject::find($request->input('subject_id'))) {
       $newSubject = Subject::create([
         'name' => $request->input('subject_id'),
       ]);
@@ -420,7 +410,7 @@ class ProductController extends Controller
     }
 
     // dynamic format entry
-    if (!Format::find($request->input('format_id'))) {
+    if ($request->input('format_id') && !Format::find($request->input('format_id'))) {
       $newFormat = Format::create([
         'name' => $request->input('format_id'),
       ]);
@@ -428,7 +418,7 @@ class ProductController extends Controller
     }
 
     // dynamic language entry
-    if (!Language::find($request->input('language_id'))) {
+    if ($request->input('language_id') && !Language::find($request->input('language_id'))) {
       $newLanguage = Language::create([
         'name' => $request->input('language_id'),
       ]);
@@ -474,8 +464,6 @@ class ProductController extends Controller
       'format_id'      => $request->format_id,
       'language_id'    => $request->language_id,
       'subject_id'     => $request->subject_id,
-      'author_id'      => $request->input('author_id'),
-      'publisher_id'   => $request->input('publisher_id'),
       'sku'            => $request->input('sku'),
       'seo_key_word'   => rtrim($request->seo_key_word, ','),
     ]);

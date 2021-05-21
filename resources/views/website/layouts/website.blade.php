@@ -29,10 +29,10 @@
             <div class="fb-contact-info pt-sm-10 pt-xs-10 pb-sm-10 pb-xs-10">
               <ul>
                 @if(isset($companyInfo->mobile1))
-                  <li class="phone"><span>মোবাইল: </span><a href="callto://+123123321345">{{ $companyInfo->mobile1 }} {{ $companyInfo->mobile2 ? ', ' . $companyInfo->mobile2 : null }}</a></li>
+                  <li class="phone"><span>Mobile: </span><a href="callto://+123123321345">{{ $companyInfo->mobile1 }} {{ $companyInfo->mobile2 ? ', ' . $companyInfo->mobile2 : null }}</a></li>
                 @endif
                 @if(isset($companyInfo->email))
-                  <li class="email"><span>ই-মেইল: </span><a href="mailto://info@yourdomain.com">{{ $companyInfo->email }}</a></li>
+                  <li class="email"><span>Email: </span><a href="mailto://info@yourdomain.com">{{ $companyInfo->email }}</a></li>
                 @endif
               </ul>
             </div>
@@ -45,25 +45,25 @@
                 <!-- Begin My Account Area -->
                 <li class="language my-account list-inline-item">
                   <div class="btn-group">
-                    <button class="dropdown-toggle">অ্যাকাউন্ট<i class="fa fa-caret-down"></i></button>
+                    <button class="dropdown-toggle">Account<i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-menu">
                       <ul>
                         @guest
                           <li>
-                            <a href="{{ route('login') }}">{{ __('লগিন') }}</a>
+                            <a href="{{ route('login') }}">{{ __('Login') }}</a>
                           </li>
                           @if (Route::has('register'))
                             <li>
-                              <a href="{{ route('register') }}">{{ __('রেজিস্ট্রেশন') }}</a>
+                              <a href="{{ route('register') }}">{{ __('Registration') }}</a>
                             </li>
                           @endif
                         @else
                           <li>
-                            <a href="{{ route('dashboard') }}">{{ __('অ্যাকাউন্ট') }}</a>
+                            <a href="{{ route('dashboard') }}">{{ __('Account') }}</a>
                           </li>
                           <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                              {{ __('লগআ উট') }}
+                              {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -75,43 +75,6 @@
                     </div>
                   </div>
                 </li>
-                <!-- My Account Area End Here -->
-                <!-- Begin Currency Area -->
-                {{--<li class="currency list-inline-item">
-                  <span>কারেন্সি:</span>
-                  <div class="btn-group">
-                    <button class="dropdown-toggle"> কারেন্সি $ <i class="fa fa-caret-down"></i></button>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="#">Euro €</a></li>
-                        <li><a href="#" class="current">USD $</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>--}}
-                <li class="language last-child list-inline-item">
-                  <span>কারেন্সি ৳</span>
-                </li>
-              {{--<li class="language last-child list-inline-item">
-                <span>উইশলিস্ট</span>
-              </li>--}}
-              <!-- Currency Area End Here -->
-                <!-- Begin Language Area -->
-              {{-- <li class="language last-child list-inline-item">
-                <span>ভাষা</span>
-                <div class="btn-group">
-                  <button class="dropdown-toggle"><img src="{{asset('assets/frontend/Images/menu/flag-icon/1.jpg')}}" alt="">English<i class="fa fa-caret-down"></i></button>
-              <div class="dropdown-menu">
-                <ul>
-                  <li><a href="#"><img src="{{asset('assets/frontend/Images/menu/flag-icon/1.jpg')}}" alt=""> English</a></li>
-                  <li><a href="#"><img src="{{asset('assets/frontend/Images/menu/flag-icon/2.jpg')}}" alt=""> Français</a></li>
-                </ul>
-              </div>
-          </div>
-          </li> --}}
-
-
-
               <!-- Language End Here -->
               </ul>
             </div>
@@ -131,9 +94,9 @@
           <div class="logo">
             <a href="{{ url('/') }}">
               @if(isset($companyInfo->logo))
-              <img src="{{asset('storage/' . $companyInfo->logo )}}" alt="BoiOnlineBD">
+              <img src="{{asset('storage/' . $companyInfo->logo )}}" alt="{{ $companyInfo->name }}">
               @else
-              <img src="" alt="BoiOnlineBD">
+              <img src="" alt="{{ $companyInfo->name }}">
               @endif
             </a>
           </div>
@@ -149,12 +112,12 @@
               <input type="hidden" name="hidden" value="1">
               <select autocomplete="off" class="nice-select select-search-category" id="categorySearch" name="category_id">
 
-                <option value="">বিষয়</option>
+                <option value="">Category</option>
                 @foreach($categories as $category)
                   <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endForeach
               </select>
-              <input type="text" class="mySearch" placeholder="এখানে লিখুন ..." id="searchKey" name="search" autocomplete="off">
+              <input type="text" class="mySearch" placeholder="Search Here ..." id="searchKey" name="search" autocomplete="off">
               <button class="fb-search_btn" type="submit"><i class="fa fa-search"></i></button>
               <div id="searchReasults" class="border position-absolute bg-white d-none"></div>
             </form>
@@ -164,18 +127,18 @@
               <li class="hm-minicart">
                 <div class="hm-minicart-trigger">
                   <span class="item-icon"></span>
-                  <span class="item-text">কার্ট
+                  <span class="item-text">Cart
 
-                      <span class="cart-item-count total-item">0</span>
+                      <span class="cart-item-count total-item">0.00tk</span>
                     </span>
-                  <span class="item-total total-cart">0</span>
+                  <span class="item-total total-cart">0.00tk</span>
                 </div>
                 <span></span>
                 <div class="minicart">
                   <ul class="minicart-product-list show-cart">
                   </ul>
                   <div class="price-content">
-                    <p class="minicart-total">Total<span class=""> &#2547;<span class="total-cart">0</span></span></p>
+                    <p class="minicart-total">Total<span class=""> &#2547;<span class="total-cart">0.00tk</span></span></p>
                   </div>
                   <div class="minicart-button text-center">
                     <a href="{{ url('cart') }}" class="fb-btn">
@@ -204,55 +167,12 @@
           <nav class="fb-navigation">
             <ul>
               <li class="active">
-                <a href="{{ url('/') }}">প্রচ্ছদ</a>
-              </li>
-              <li class="megamenu-holder">
-                <a href="#">প্রকাশক</a>
-                <ul class="megamenu">
-                  @foreach ($publishers->chunk(8) as $publishersChunk)
-                    <li>
-                      @foreach ($publishersChunk as $publisher)
-                        <ul>
-                          <li><a href="{{ route('all.products', ['publisher', $publisher->id]) }}">{{ $publisher->name }}</a></li>
-                        </ul>
-                      @endforeach
-                    </li>
-                  @endforeach
-                </ul>
-              </li>
-
-              <li class="megamenu-holder">
-                <a href="#">লেখক</a>
-                <ul class="megamenu">
-                  @foreach ($authors->take(39)->chunk(8) as $authorsChunk)
-                    @php
-                      $lastItem = $loop->last ? true : false;
-                    @endphp
-                    <li>
-                      @foreach ($authorsChunk as $author)
-                        <ul>
-                          @if ($lastItem && $loop->last)
-                            <li><a href="{{ route('all.products', ['author', $author->id]) }}">{{ $author->name }}</a></li>
-                            @if (count($authors)>40)
-                              <li><a href="{{ route('author.all') }}" class="btn btn-outline-dark"> See more </a></li>
-                            @endif
-
-                            {{-- <li><a href="{{ route('all.products', ['author', $author->id]) }}">{{ $author->name }}</a></li> --}}
-                          @else
-                            {{-- <li><a href="{{ route('all.products', ['subject', $subject->id]) }}">{{ $subject->name }}</a>
-                        </li> --}}
-                            <li><a href="{{ route('all.products', ['author', $author->id]) }}">{{ $author->name }}</a></li>
-                          @endif
-                        </ul>
-                      @endforeach
-                    </li>
-                  @endforeach
-                </ul>
+                <a href="{{ url('/') }}">Home</a>
               </li>
 
 
               <li class="megamenu-holder">
-                <a href="#">বিষয়</a>
+                <a href="javascript:">Category</a>
                 <ul class="megamenu">
                   @foreach ($categories->take(39)->chunk(8) as $categoriesChunk)
                     @php
@@ -277,61 +197,14 @@
                   @endforeach
                 </ul>
               </li>
-
-              {{-- <li class="dropdown-holder">
-                  <a href="shop-left-sidebar.html">প্যাকছ</a>
-                  <ul class="hb-dropdown">
-                    <li><a href="shop-left-sidebar.html">Shop Layouts</a>
-                      <ul>
-                        <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                        <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                        <li><a href="shop-3-column.html">Shop 3 Column</a></li>
-                        <li><a href="shop-4-column.html">Shop 4 Column</a></li>
-                        <li><a href="shop-list-left-sidebar.html">Shop List</a></li>
-                        <li><a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a></li>
-                        <li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="product-details.html">Product Details</a>
-                      <ul>
-                        <li><a href="product-details.html">Product Details</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="wishlist.html">Wishlist</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="compare.html">Compare</a></li>
-                  </ul>
-                </li> --}}
-
-              {{--<li class="dropdown-holder">
-                <a href="">সংবাদ</a>
-                <ul class="hb-dropdown">
-                  <li><a href="blog-left-sidebar.html">A</a></li>
-                  <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                  <li><a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a></li>
-                  <li><a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-                  <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                  <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                  <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                  <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                  <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                </ul>
-              </li>--}}
+              {{-- <li>
+                <a href="{{ route('allPost.index') }}">Blog</a>
+              </li> --}}
               <li>
-                <a href="{{ route('allPost.index') }}">সংবাদ</a>
+                <a href="{{url('about-us')}}">About Us</a>
               </li>
               <li>
-                <a href="{{url()->to('about-us')}}">কোম্পানি</a>
-              </li>
-              <li>
-                <a href="{{url()->to('products/category/20')}}">প্যাকেজ</a>
-              </li>
-              <li>
-                <a href="{{url()->to('products/category/21')}}">বই ব্যাংক</a>
-              </li>
-              <li>
-                <a href="{{ url('customer_support') }}">যোগাযোগ</a>
+                <a href="{{ url('customer_support') }}">Contact</a>
               </li>
             </ul>
           </nav>
@@ -343,18 +216,18 @@
             <li class="hm-minicart">
               <div class="hm-minicart-trigger">
                 <span class="item-icon"></span>
-                <span class="item-text">কার্ট
+                <span class="item-text">Cart
 
                       <span class="cart-item-count total-item">0</span>
                     </span>
-                <span class="item-total total-cart">$0.00</span>
+                <span class="item-total total-cart">0.00tk</span>
               </div>
               <span></span>
               <div class="minicart">
                 <ul class="minicart-product-list show-cart">
                 </ul>
                 <div class="price-content">
-                  <p class="minicart-total">Total<span class=""> &#2547;<span class="total-cart">0.00</span></span></p>
+                  <p class="minicart-total">Total<span class=""> &#2547;<span class="total-cart">0.00tk</span></span></p>
                 </div>
                 <div class="minicart-button text-center">
                   <a href="{{ url('cart') }}" class="fb-btn">
@@ -387,36 +260,6 @@
 
 {{------footer-----}}
 <div class="fb-footer">
-  <!-- Begin Footer Top Area -->
-{{--<div class="fb-footer_top fb-footer_top-3">
-  <div class="container">
-    <div class="row">
-      <!-- Begin FB's Newsletters Area -->
-      <div class="col-lg-5">
-        <div class="fb-newsletters">
-          <h2 class="newsletters-headeing">Sign Up For Newsletters</h2>
-          <p class="short-desc">Be The First To Know. Sign Up For Newsletter Today</p>
-        </div>
-      </div>
-      <!-- FB's Newsletters Area End Here -->
-      <!-- Begin FB's Newsletters Form Area -->
-      <div class="col-lg-7">
-        <div class="fb-newsletters_form fb-newsletters_form-3 pt-sm-15 pt-xs-15">
-          <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form"
-            name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
-            <div id="mc_embed_signup_scroll">
-              <div id="mc-form" class="mc-form subscribe-form form-group">
-                <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" />
-                <button class="btn mt-sm-15 mt-xs-15" id="mc-submit">Subscribe!</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- FB's Newsletters Form Area End Here -->
-    </div>
-  </div>
-</div>--}}
 <!-- Footer Top Area End Here -->
   <!-- Begin FB's Footer Middle Area -->
   <div class="fb-footer_middle bg-white">
@@ -426,7 +269,7 @@
         <div class="row">
           <div class="col-md-8">
             <div class="row">
-              <div class="col-md-3 col-sm-6">
+              <div class="col-sm-6">
                 <div class="fb-footer_widget fb-footer_widget-3 pt-20">
                   <h3 class="fb-footer-widget-headeing">Categories</h3>
                   <ul>
@@ -436,27 +279,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="fb-footer_widget fb-footer_widget-3 pt-20 pt-xs-0">
-                  <h3 class="fb-footer-widget-headeing">Author</h3>
-                  <ul>
-                    @foreach($authors->take(6) as $author)
-                      <li><a href="{{ route('all.products', ['author', $author->id]) }}">{{ $author->name }}</a></li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="fb-footer_widget fb-footer_widget-3 pt-20 pt-xs-0">
-                  <h3 class="fb-footer-widget-headeing">Publisher</h3>
-                  <ul>
-                    @foreach($publishers->take(6) as $publisher)
-                      <li><a href="{{ route('all.products', ['publisher', $publisher->id]) }}">{{ $publisher->name }}</a></li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
+              <div class="col-sm-6">
                 <div class="fb-footer_widget fb-footer_widget-3 pt-20 pt-xs-0">
                   <h3 class="fb-footer-widget-headeing">Others</h3>
                   <ul>
@@ -473,7 +296,7 @@
           <div class="col-md-4">
             <div class="footer-widget-logo pt-30 mb-20 pt-sm-5 pt-xs-5">
               <a href="index.html">
-                <img src="{{asset('storage/' . $companyInfo->footer_logo )}}" alt="BoiOnlineBD">
+                <img src="{{asset('storage/' . $companyInfo->footer_logo )}}" alt="{{ $companyInfo->name }}">
               </a>
             </div>
             <div class="footer-widget-info">
@@ -516,50 +339,6 @@
         </div>
       </div>
       <!-- Footer Middle Top Area End Here -->
-      <!-- Begin Footer Middle Bottom Area -->
-      <div class="footer-middle-bottom">
-        <div class="row">
-          <div class="col-lg-12">
-            <!-- Begin Footer Tag Link Area -->
-          {{--<div class="footer-tag-links footer-tag-links-3 pt-20 pb-20">
-            <ul>
-              <li><a href="#">Online Shopping</a></li>
-              <li><a href="#">Promotions</a></li>
-              <li><a href="#">My Orders</a></li>
-              <li><a href="#">Help</a></li>
-              <li><a href="#">Customer Service</a></li>
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Most Populars</a></li>
-              <li><a href="#">New Arrivals</a></li>
-              <li><a href="#">Special Products</a></li>
-              <li><a href="#">Manufacturers</a></li>
-              <li><a href="#">Our Stores</a></li>
-              <li><a href="#">Shipping</a></li>
-              <li><a href="#">Payments</a></li>
-              <li><a href="#">Warantee</a></li>
-              <li><a href="#">Refunds</a></li>
-              <li><a href="#">Checkout</a></li>
-              <li><a href="#">Discount</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Policy</a></li>
-              <li><a href="#">Shipping</a></li>
-              <li><a href="#">Payments</a></li>
-              <li><a href="#">Returns</a></li>
-              <li><a href="#">Refunds</a></li>
-            </ul>
-          </div>--}}
-          <!-- Footer Tag Link Area End Here -->
-            <!-- Begin Footer Payment Area -->
-            <div class="payment text-center pb-30">
-              <a href="#">
-                <img src="{{asset('storage/images/payment.jpeg')}}" style="height: 100px" alt="FB's Footer Payment">
-              </a>
-            </div>
-            <!-- Footer Payment Area End Here -->
-          </div>
-        </div>
-      </div>
-      <!-- Footer Middle Bottom Area End Here -->
     </div>
   </div>
   <!-- FB's Footer Middle Area End Here -->
@@ -570,16 +349,16 @@
         <!-- Begin Copyright Area -->
         <div class="col-lg-6 col-md-6">
           <div class="copyright copyright-3">
-            <span>Copyright &copy; 2021 <a href="#">BoiOnlineBd.</a> All rights reserved.</span>
+            <span>Copyright &copy; 2021 <a href="{{ url('/') }}">{{ $companyInfo->name }}.</a> All rights reserved.</span>
           </div>
         </div>
         <!-- Copyright Area End Here -->
         <!-- Begin Footer Bottom Menu Area -->
-        <div class="col-lg-6 col-md-6">
+        {{-- <div class="col-lg-6 col-md-6">
           <div class="fotter-bottom_menu fotter-bottom_menu-3 text-right copyright copyright-3">
-            <span>Developed By <a href="https://spinnertech.dev">Spinner Tech</a></span>
+            <span>Developed By <a href=""></a></span>
           </div>
-        </div>
+        </div> --}}
         <!-- Footer Bottom Menu Area End Here -->
       </div>
     </div>

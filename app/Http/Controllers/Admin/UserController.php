@@ -32,7 +32,7 @@ class UserController extends Controller
   {
     $this->checkPermission(['superadmin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
     $type = request()->input('type') ?? 'user';
-    if ($type === 'publisher' || $type === 'author' || $type === 'user') {
+    if ($type === 'tailor' || $type === 'user') {
       return response()->view('admin.userManagement.create', compact('type'));
     }
     abort(404);

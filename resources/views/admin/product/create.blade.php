@@ -36,7 +36,7 @@
       @csrf
       <div class="kt-portlet__body">
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col-lg-8 offset-lg-2">
             <div class="form-group">
               <label for="name"><b>{{__('Product Name')}} <span class="text-danger">*</span></b></label>
               <input name="name" id="name" value="{{old('name')}}" placeholder="Ex: " type="text" class="form-control  @error('name') is-invalid @enderror">
@@ -102,7 +102,7 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            {{--<div class="form-group row">
               <div class="col-lg-12">
                 <label for="subject_id"><b>{{__('product Subject')}}</b></label>
                 <select class="form-control select2-withTag" name="subject_id" value="{{ old('subject_id') }}">
@@ -115,10 +115,21 @@
                 @enderror
                 <span class="form-text text-muted">Select product subject.</span>
               </div>
-            </div>
+            </div>--}}
+
 
             <div class="form-group row">
               <div class="col-lg-6">
+                <label for="stock"><b>{{__('Product Initial Stock')}}</b></label>
+                <input name="stock" id="stock" value="{{old('stock')}}" placeholder="Ex: 100" type="number" class="form-control  @error('stock') is-invalid @enderror">
+                @error('stock')
+                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                @enderror
+                <span class="form-text text-muted">Please enter the Product Stock.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
                 <label for="tag_id"><b>{{__('Tags')}}</b></label>
                 <select class="form-control select2-withTag" multiple name="tag_id[]" value="{{ old('tag_id') }}">
                   @foreach ($tags as $tag)
@@ -129,21 +140,9 @@
                 <span class="text-danger"><strong>{{ $message }}</strong></span>
                 @enderror
                 <span class="form-text text-muted">Select product Tags.</span>
-              </div>
-
-              <div class="col-lg-6">
-                <label for="year"><b>{{__('Year Published')}}</b></label>
-                <select class="form-control select2-withTag" name="year" value="{{ old('year')}}">
-                  @for($i = date("Y"); $i >= 1800; $i--) <option value="{{ $i }}" {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}</option>@endfor
-                </select>
-                @error('year')
-                <span class="text-danger"><strong>{{ $message }}</strong></span>
-                @enderror
-                <span class="form-text text-muted">Select product Year Published.</span>
-              </div>
             </div>
 
-            <div class="form-group row">
+            {{--<div class="form-group row">
               <div class="col-lg-6">
                 <label for="format_id"><b>{{__('Product Format')}} <span class="text-danger">*</span></b></label>
                 <select class="form-control select2-withTag" name="format_id" value="{{ old('format_id') }}">
@@ -169,27 +168,7 @@
                 @enderror
                 <span class="form-text text-muted">Select product language.</span>
               </div>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-lg-6">
-                <label for="stock"><b>{{__('Product Stock')}}</b></label>
-                <input name="stock" id="stock" value="{{old('stock')}}" placeholder="Ex: 100" type="number" class="form-control  @error('stock') is-invalid @enderror">
-                @error('stock')
-                <span class="text-danger"><strong>{{ $message }}</strong></span>
-                @enderror
-                <span class="form-text text-muted">Please enter the Product Stock.</span>
-              </div>
-
-              <div class="col-lg-6">
-                <label for="page"><b>{{__('Pages')}}</b></label>
-                <input name="page" id="page" value="{{old('page')}}" placeholder="Ex: 100 " type="number" class="form-control  @error('page') is-invalid @enderror">
-                @error('page')
-                <span class="text-danger"><strong>{{ $message }}</strong></span>
-                @enderror
-                <span class="form-text text-muted">Please enter the Product Pages.</span>
-              </div>
-            </div>
+            </div>--}}
 
             <div class="form-group row">
               <div class="col-lg-4">
@@ -265,68 +244,6 @@
               <span class="text-danger"><strong>{{ $message }}</strong></span>
               @enderror
               <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. <br> Standard Resulation 940px X 720px (H x W). <br> Maximum size 512kb.</span>
-            </div>
-
-            <div class="form-group">
-              <div>
-                <label for="social_image"><b>{{__('Social Image')}}</b></label>
-              </div>
-              <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
-                <div id="social_image" class="kt-avatar__holder_cover" > </div>
-                <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Change">
-                  <i class="fa fa-pen"></i>
-                  <input type="file" value="{{old('social_image')}}" class="@error('social_image') is-invalid @enderror" onchange="readURL(this, '#social_image')" name="social_image" accept=".png, .jpg, .jpeg">
-                </label>
-                <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" onclick="ImageClear('#social_image')" data-original-title="Cancel">
-                  <i class="fa fa-times"></i>
-                </span>
-              </div>
-              @error('social_image')
-              <span class="text-danger"><strong>{{ $message }}</strong></span>
-              @enderror
-              <span class="form-text text-muted">Allowed file types: png, jpg, jpeg. <br> Maximum size 512kb.</span>
-            </div>
-          </div>
-
-          <div class="col-lg-5">
-            <div class="form-group">
-              <label for="author_id"><b>{{__('Author')}} <span class="text-danger">*</span></b></label>
-              <select class="form-control select2" name="author_id" value="{{ old('author_id') }}">
-                @foreach ($authors as $author)
-                <option value="{{ $author->id }}" {{ old('author_id') == $author->id ? 'selected' : null }}>{{ $author->name }}</option>
-                @endforeach
-              </select>
-              @error('author_id')
-              <span class="text-danger"><strong>{{ $message }}</strong></span>
-              @enderror
-              <span class="form-text text-muted">Select Author.</span>
-            </div>
-
-            <div class="form-group">
-              <label for="publisher_id"><b>{{__('Publisher')}} <span class="text-danger">*</span></b></label>
-              <select class="form-control select2" name="publisher_id" value="{{ old('publisher_id') }}">
-                @foreach ($publishers as $publisher)
-                <option value="{{ $publisher->id }}" {{ old('publisher_id') == $publisher->id ? 'selected' : null }}>{{ $publisher->name }}</option>
-                @endforeach
-              </select>
-              @error('publisher_id')
-              <span class="text-danger"><strong>{{ $message }}</strong></span>
-              @enderror
-              <span class="form-text text-muted">Select Publisher</span>
-            </div>
-
-            <div class="form-group row">
-              @foreach ($features as $feature)
-              <div class="col-lg-6">
-                <label class="checkbox">
-                  <input name="features[]" value="{{ $feature->id }}" {{ old($feature->id) ? "checked" : null }} type="checkbox" class=" @error($feature->id) is-invalid @enderror">
-                  <b class="ml-2">{{__( $feature->name )}}</b>
-                </label>
-                @error($feature->id)
-                <span class="text-danger"><strong>{{ $message }}</strong></span>
-                @enderror
-              </div>
-              @endforeach
             </div>
           </div>
         </div>

@@ -66,16 +66,16 @@
                 @canany(['superadmin','publisher.all','publisher.create'])
 
                   <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
-                    <a href="{{ route('user.create', ['type' => 'publisher']) }}" class="kt-menu__link">
+                    <a href="{{ route('user.create', ['type' => 'tailor']) }}" class="kt-menu__link">
                       <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                         <span></span>
                       </i>
                       <span
-                        class="kt-menu__link-text">Create Publisher</span>
+                        class="kt-menu__link-text">Add New Tailor</span>
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','author.all','author.create'])
+                {{--@canany(['superadmin','author.all','author.create'])
 
                   <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
                     <a href="{{ route('user.create', ['type' => 'author']) }}" class="kt-menu__link">
@@ -86,7 +86,7 @@
                         class="kt-menu__link-text">Create Author</span>
                     </a>
                   </li>
-                @endcanany
+                @endcanany--}}
 
                 @canany(['superadmin'])
 
@@ -115,7 +115,7 @@
         'format.all','format.add','format.edit','format.delete','format.view',
         ])
           <li
-            class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/product*', 'dashboard/tag*', 'dashboard/format*', 'dashboard/language*', 'dashboard/subject*', 'dashboard/category*', 'dashboard/subcategory*', 'dashboard/feature*', 'dashboard/coupon*', 'dashboard/stock*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
+            class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/product*', 'dashboard/tag*', 'dashboard/format*', 'dashboard/language*', 'dashboard/subject*', 'dashboard/category', 'dashboard/category/*', 'dashboard/subcategory*', 'dashboard/feature*', 'dashboard/coupon*', 'dashboard/stock*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
             aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
             <a href="javascript:" class="kt-menu__link kt-menu__toggle"><i
                 class="kt-menu__link-icon fas fa-sliders-h"></i>
@@ -137,29 +137,6 @@
                         class="kt-menu__link-icon fab fa-product-hunt"></i>
                       <span
                         class="kt-menu__link-text">All Products</span>
-                    </a>
-                  </li>
-                @endcanany
-
-                @canany(['superadmin','feature-category.all','feature-category.add','feature-category.view','feature-category.edit','feature-category.delete'])
-                  <li
-                    class="kt-menu__item kt-menu__item {{ request()->is('dashboard/feature-category*') ? 'kt-menu__item--active' : null }}"
-                    aria-haspopup="true">
-                    <a href="{{ route('feature-category.index') }}" class="kt-menu__link"><i
-                        class="kt-menu__link-icon fa fa-layer-group"></i>
-                      <span
-                        class="kt-menu__link-text">Features Category</span>
-                    </a>
-                  </li>
-                @endcanany
-                @canany(['superadmin','feature.all','feature.add','feature.view','feature.edit','feature.delete'])
-                  <li
-                    class="kt-menu__item kt-menu__item {{ request()->is(['dashboard/feature', 'dashboard/feature/*']) ? 'kt-menu__item--active' : null }}"
-                    aria-haspopup="true">
-                    <a href="{{ route('feature.index') }}" class="kt-menu__link"><i
-                        class="kt-menu__link-icon fa fa-layer-group"></i>
-                      <span
-                        class="kt-menu__link-text">Features</span>
                     </a>
                   </li>
                 @endcanany
@@ -187,7 +164,7 @@
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','subject.all','subject.add','subject.view','subject.edit','subject.delete'])
+                {{--@canany(['superadmin','subject.all','subject.add','subject.view','subject.edit','subject.delete'])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/subject*') ? 'kt-menu__item--active' : null }}"
                     aria-haspopup="true">
@@ -219,7 +196,7 @@
                         class="kt-menu__link-text">Languages</span>
                     </a>
                   </li>
-                @endcanany
+                @endcanany--}}
                 @canany(['superadmin','tag.all','tag.add','tag.view','tag.edit','tag.delete'])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/tag*') ? 'kt-menu__item--active' : null }}"
@@ -253,7 +230,7 @@
             </div>
           </li>
         @endcanany
-        @canany(['superadmin','blog.all', 'post.create','post.edit','post.view','post.delete'])
+        {{-- @canany(['superadmin','blog.all', 'post.create','post.edit','post.view','post.delete'])
           <li
             class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/post*', 'dashboard/post_tag*', 'dashboard/post_category*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
             aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
@@ -291,7 +268,7 @@
               </ul>
             </div>
           </li>
-        @endcanany
+        @endcanany --}}
         @canany(['superadmin','customer_support.all','customer_support.delete','customer_support.view'])
           <li class="kt-menu__item" aria-haspopup="true">
             <a href="{{ route('customer_support.index') }}" class="kt-menu__link"><i
@@ -359,7 +336,7 @@
                       class="kt-menu__link-text">Slider Settings</span>
                   </a>
                 </li>
-                <li
+                {{--<li
                   class="kt-menu__item kt-menu__item {{ request()->is('dashboard/banner*') ? 'kt-menu__item--active' : null }}"
                   aria-haspopup="true">
                   <a href="{{ route('ads.banner') }}" class="kt-menu__link">
@@ -369,7 +346,7 @@
                     <span
                       class="kt-menu__link-text">Ads Banner Settings</span>
                   </a>
-                </li>
+                </li>--}}
                 <li
                   class="kt-menu__item kt-menu__item {{ request()->is('dashboard/categorysection*') ? 'kt-menu__item--active' : null }}"
                   aria-haspopup="true">
@@ -385,7 +362,7 @@
             </div>
           </li>
         @endcanany
-        @canany(['superadmin', 'report.all'])
+        {{--@canany(['superadmin', 'report.all'])
           <li
             class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/report*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
             aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
@@ -411,7 +388,7 @@
               </ul>
             </div>
           </li>
-        @endcanany
+        @endcanany--}}
         <li
           class="kt-menu__item kt-menu__item--submenu {{ request()->is(['updatePassword*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
           aria-haspopup="true" data-ktmenu-submenu-toggle="hover">

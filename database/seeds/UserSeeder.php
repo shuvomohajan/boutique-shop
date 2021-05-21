@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $admin = User::create([
+        User::create([
             'name'              => 'Admin',
             'type'              => 'admin',
             'email'             => 'admin@gmail.com',
@@ -22,21 +22,6 @@ class UserSeeder extends Seeder
             'password'          => Hash::make('password'),
         ]);
 
-        User::create([
-            'name'              => 'publisher',
-            'type'              => 'publisher',
-            'email'             => 'publisher@gmail.com',
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'password'          => Hash::make('password'),
-        ]);
-          User::create([
-            'name'              => 'author',
-            'type'              => 'author',
-            'email'             => 'author@gmail.com',
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'password'          => Hash::make('password'),
-        ]);
-
-        factory(User::class, 10)->create();
+//        factory(User::class, 10)->create();
     }
 }
