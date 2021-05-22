@@ -57,33 +57,17 @@
       <!-- content -->
         @yield('content')
       </div>
-    @include('admin.layouts.includes.footer')
-    <!-- Footer -->
     </div>
   </div>
 </div>
 @include('admin.layouts.includes.quickPanel')
-<!-- begin::Scrolltop -->
 <div id="kt_scrolltop" class="kt-scrolltop">
   <i class="fa fa-arrow-up"></i>
 </div>
 
-{{-- <script type="text/javascript" src="{{asset('assets/scripts/jquery-3.4.1.min.js')}}"></script>
-<script src="{{asset('assets/plugins/global/plugins.bundle.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/scripts.bundle.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/pages/dashboard.js')}}" type="text/javascript"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/pages/crud/datatables/basic/paginations.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/pages/crud/metronic-datatable/base/html-table.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/pages/crud/forms/widgets/select2.js')}}" type="text/javascript"></script>
-<script src="{{asset('assets/js/pages/crud/file-upload/ktavatar.js')}}" type="text/javascript"></script> --}}
-
-
 <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/scripts.bundle.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{asset('assets/js/pages/crud/metronic-datatable/base/html-table.js')}}" type="text/javascript"></script>
-
 
 @stack('script')
 

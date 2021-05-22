@@ -16,7 +16,7 @@ class LanguageController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'language.all', 'language.add', 'language.view', 'language.edit', 'language.delete']);
+    $this->checkPermission(['admin', 'language.all', 'language.add', 'language.view', 'language.edit', 'language.delete']);
 
     $languages = Language::all();
     return view('admin.language.index', compact('languages'));
@@ -29,7 +29,7 @@ class LanguageController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'language.all', 'language.add']);
+    $this->checkPermission(['admin', 'language.all', 'language.add']);
 
     return view('admin.language.create');
   }
@@ -42,7 +42,7 @@ class LanguageController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'language.all', 'language.add']);
+    $this->checkPermission(['admin', 'language.all', 'language.add']);
 
     $request->validate([
       'name'   => 'required|max:255',
@@ -77,7 +77,7 @@ class LanguageController extends Controller
    */
   public function edit(Language $language)
   {
-    $this->checkPermission(['superadmin', 'language.all', 'language.edit']);
+    $this->checkPermission(['admin', 'language.all', 'language.edit']);
 
     return view('admin.language.edit', compact('language'));
   }
@@ -91,7 +91,7 @@ class LanguageController extends Controller
    */
   public function update(Request $request, Language $language)
   {
-    $this->checkPermission(['superadmin', 'language.all', 'language.edit']);
+    $this->checkPermission(['admin', 'language.all', 'language.edit']);
 
     $request->validate([
       'name'   => 'required|max:255',
@@ -116,7 +116,7 @@ class LanguageController extends Controller
    */
   public function destroy(Language $language)
   {
-    $this->checkPermission(['superadmin', 'language.all', 'language.delete']);
+    $this->checkPermission(['admin', 'language.all', 'language.delete']);
 
     if (Product::where('language_id', $language->id)->count() > 0) {
       return redirect()->back()->with('Fmsg', 'Can\'t Delete, Item Exist In Product.');

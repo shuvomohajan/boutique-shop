@@ -18,7 +18,7 @@ class UserController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'user.all', 'user.view', 'user.edit', 'user.delete', 'publisher.all', 'publisher.edit', 'publisher.view', 'publisher.delete', 'author.all', 'author.edit', 'author.view', 'author.delete']);
+    $this->checkPermission(['admin', 'user.all', 'user.view', 'user.edit', 'user.delete', 'publisher.all', 'publisher.edit', 'publisher.view', 'publisher.delete', 'author.all', 'author.edit', 'author.view', 'author.delete']);
     $users = User::all();
     return response()->view('admin.userManagement.index', compact('users'));
   }
@@ -30,7 +30,7 @@ class UserController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
+    $this->checkPermission(['admin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
     $type = request()->input('type') ?? 'user';
     if ($type === 'tailor' || $type === 'user') {
       return response()->view('admin.userManagement.create', compact('type'));
@@ -46,7 +46,7 @@ class UserController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
+    $this->checkPermission(['admin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
     $request->validate([
       'name'        => 'required|max:255',
       'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -108,7 +108,7 @@ class UserController extends Controller
    */
   public function edit(User $user)
   {
-    $this->checkPermission(['superadmin', 'user.all', 'user.edit', 'author.all', 'publisher.all', 'publisher.edit', 'author.edit']);
+    $this->checkPermission(['admin', 'user.all', 'user.edit', 'author.all', 'publisher.all', 'publisher.edit', 'author.edit']);
     return response()->view('admin.userManagement.edit', compact('user'));
   }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    $this->checkPermission(['superadmin', 'user.all', 'user.edit', 'author.all', 'publisher.all', 'publisher.edit', 'author.edit']);
+    $this->checkPermission(['admin', 'user.all', 'user.edit', 'author.all', 'publisher.all', 'publisher.edit', 'author.edit']);
     $request->validate([
       'name'        => 'required|max:255',
       'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -185,7 +185,7 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    $this->checkPermission(['superadmin', 'user.all', 'user.delete', 'author.delete', 'publisher.all', 'publisher.delete', 'author.delete']);
+    $this->checkPermission(['admin', 'user.all', 'user.delete', 'author.delete', 'publisher.all', 'publisher.delete', 'author.delete']);
     $filePath = 'storage/' . $user->image;
     if (File::exists($filePath)) {
       File::delete($filePath);

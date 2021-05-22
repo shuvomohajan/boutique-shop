@@ -15,7 +15,7 @@ class PostCategoryController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'blog-category.all','blog-category.view','blog-category.delete']);
+    $this->checkPermission(['admin', 'blog-category.all','blog-category.view','blog-category.delete']);
     $categories = PostCategory::all();
     return view('admin.post.postCategories', compact('categories'));
   }
@@ -83,7 +83,7 @@ class PostCategoryController extends Controller
    */
   public function destroy($id)
   {
-    $this->checkPermission(['superadmin', 'blog-category.all','blog-category.delete']);
+    $this->checkPermission(['admin', 'blog-category.all','blog-category.delete']);
     if(PostCategory::findOrFail($id)->delete()){
       return back()->with('Smsg', 'Category Deleted Successfully.');
     }

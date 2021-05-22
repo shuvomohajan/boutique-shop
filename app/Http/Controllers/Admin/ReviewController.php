@@ -37,7 +37,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-      $this->checkPermission(['superadmin', 'review.all', 'review.add']);
+      $this->checkPermission(['admin', 'review.all', 'review.add']);
       $request->validate([
         'rating'=>'required',
         'feedback'=>'required',

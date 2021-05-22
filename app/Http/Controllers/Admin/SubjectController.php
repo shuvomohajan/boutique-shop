@@ -17,7 +17,7 @@ class SubjectController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'subject.all', 'subject.add', 'subject.view', 'subject.edit', 'subject.delete']);
+    $this->checkPermission(['admin', 'subject.all', 'subject.add', 'subject.view', 'subject.edit', 'subject.delete']);
 
     $subjects = Subject::all();
     return view('admin.subject.index', compact('subjects'));
@@ -30,7 +30,7 @@ class SubjectController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'subject.all', 'subject.add']);
+    $this->checkPermission(['admin', 'subject.all', 'subject.add']);
 
     return view('admin.subject.create');
   }
@@ -43,7 +43,7 @@ class SubjectController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'subject.all', 'subject.add']);
+    $this->checkPermission(['admin', 'subject.all', 'subject.add']);
 
     $request->validate([
       'name'    => 'required|max:255',
@@ -89,7 +89,7 @@ class SubjectController extends Controller
    */
   public function edit(Subject $subject)
   {
-    $this->checkPermission(['superadmin', 'subject.all', 'subject.edit']);
+    $this->checkPermission(['admin', 'subject.all', 'subject.edit']);
 
     return view('admin.subject.edit', compact('subject'));
   }
@@ -103,7 +103,7 @@ class SubjectController extends Controller
    */
   public function update(Request $request, Subject $subject)
   {
-    $this->checkPermission(['superadmin', 'subject.all', 'subject.edit']);
+    $this->checkPermission(['admin', 'subject.all', 'subject.edit']);
 
     $request->validate([
       'name'    => 'required|max:255',
@@ -143,7 +143,7 @@ class SubjectController extends Controller
    */
   public function destroy(Subject $subject)
   {
-    $this->checkPermission(['superadmin', 'subject.all', 'subject.delete']);
+    $this->checkPermission(['admin', 'subject.all', 'subject.delete']);
 
     $filePath = 'storage/' . $subject->icon;
     if (File::exists($filePath)) {

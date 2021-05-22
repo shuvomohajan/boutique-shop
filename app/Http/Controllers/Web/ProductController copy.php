@@ -79,9 +79,6 @@ class ProductController extends Controller
   public function productDetails($id)
   {
     $data['product'] = Product::find($id);
-    $subject_id = $data['product']->subject_id;
-    $data['relatedProducts'] = Product::where('subject_id', $subject_id)->take(12)->get();
-    // dd($data['relatedProducts']);
     $data['reviews'] = Review::where('product_id', $id)->orderBy('created_at', 'desc')->paginate(10);
     return view('website.product_details', $data);
   }

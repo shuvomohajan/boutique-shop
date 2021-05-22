@@ -111,7 +111,7 @@
                   @php
                       $auth = Auth::user()->type;
                   @endphp
-                  @if ($auth == 'user'||$auth == 'author'||$auth == 'publisher')
+                  @if ($auth == 'user'||$auth == 'tailor')
                     disabled
                   @endif
                   >

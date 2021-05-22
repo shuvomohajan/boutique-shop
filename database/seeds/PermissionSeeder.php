@@ -13,25 +13,13 @@ class PermissionSeeder extends Seeder
     public function run()
     {
       $permissions = [
-        ['name' => 'superadmin'],
+        ['name' => 'admin'],
 
         ['name' => 'user.all'],
         ['name' => 'user.add'],
         ['name' => 'user.edit'],
         ['name' => 'user.view'],
         ['name' => 'user.delete'],
-
-        ['name' => 'author.all'],
-        ['name' => 'author.add'],
-        ['name' => 'author.edit'],
-        ['name' => 'author.view'],
-        ['name' => 'author.delete'],
-
-        ['name' => 'publisher.all'],
-        ['name' => 'publisher.add'],
-        ['name' => 'publisher.edit'],
-        ['name' => 'publisher.view'],
-        ['name' => 'publisher.delete'],
 
         ['name' => 'product.all'],
         ['name' => 'product.add'],
@@ -62,30 +50,6 @@ class PermissionSeeder extends Seeder
         ['name' => 'category.edit'],
         ['name' => 'category.view'],
         ['name' => 'category.delete'],
-
-        ['name' => 'feature.all'],
-        ['name' => 'feature.add'],
-        ['name' => 'feature.edit'],
-        ['name' => 'feature.view'],
-        ['name' => 'feature.delete'],
-
-        ['name' => 'subject.all'],
-        ['name' => 'subject.add'],
-        ['name' => 'subject.edit'],
-        ['name' => 'subject.view'],
-        ['name' => 'subject.delete'],
-
-        ['name' => 'format.all'],
-        ['name' => 'format.add'],
-        ['name' => 'format.edit'],
-        ['name' => 'format.view'],
-        ['name' => 'format.delete'],
-
-        ['name' => 'language.all'],
-        ['name' => 'language.add'],
-        ['name' => 'language.edit'],
-        ['name' => 'language.view'],
-        ['name' => 'language.delete'],
 
         ['name' => 'tag.all'],
         ['name' => 'tag.add'],

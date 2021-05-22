@@ -97,15 +97,15 @@
                                 {{$user->status ? 'active' : 'Inactive'}}
                             </td>
                             <td>
-                              @canany(['superadmin','user.all','author.all','publisher.all','user.edit','author.edit','publisher.edit','user.delete','author.delete','publisher.delete',])
+                              @canany(['admin','user.all','user.edit','user.delete'])
                               @if ($user->id == Auth::user()->id || Auth::user()->type == 'admin' || Auth::user()->hasAnyPermission(['user.all','user.edit','user.delete']))
                               <form method="post" action="{{ route('user.destroy',$user->id) }}">
-                                @canany(['superadmin','user.all','author.all','publisher.all','user.edit','author.edit','publisher.edit'])
+                                @canany(['admin','user.all','user.edit'])
                                 <a href="{{ route('user.edit',$user->id) }}" class="btn-label-brand btn btn-sm btn-bold">Edit</a>
                                 @csrf
                                 @method('DELETE')
                                 @endcanany
-                                @canany(['superadmin','user.all','author.all','publisher.all','user.delete','author.delete','publisher.delete',])
+                                @canany(['admin','user.all','user.delete',])
                                   <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn-sm btn btn-danger">Delete</button>
                                 @endcanany
                               </form>

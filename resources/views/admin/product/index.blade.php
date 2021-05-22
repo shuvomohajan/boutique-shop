@@ -87,16 +87,6 @@
         <tbody>
           <!-- start -->
           @php ($i = 1)
-          @endphp
-          @php
-              if(Auth::user()->type == 'author'){
-                $products = Auth::user()->Product_author()->get();
-                // dd($products);
-              }elseif ( Auth::user()->type == 'publisher') {
-
-                $products = Auth::user()->Product_publisher()->get();
-              }
-          @endphp
 
           @foreach($products as $product)
           <tr>

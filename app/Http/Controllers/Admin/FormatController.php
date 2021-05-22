@@ -16,7 +16,7 @@ class FormatController extends Controller
      */
     public function index()
     {
-      $this->checkPermission(['superadmin','format.all','format.add','format.view','format.edit','format.delete']);
+      $this->checkPermission(['admin','format.all','format.add','format.view','format.edit','format.delete']);
 
         $formats = Format::all();
         return view('admin.format.index', compact('formats'));
@@ -29,7 +29,7 @@ class FormatController extends Controller
      */
     public function create()
     {
-      $this->checkPermission(['superadmin','format.all','format.add']);
+      $this->checkPermission(['admin','format.all','format.add']);
 
         return view('admin.format.create');
     }
@@ -42,7 +42,7 @@ class FormatController extends Controller
      */
     public function store(Request $request)
     {
-      $this->checkPermission(['superadmin','format.all','format.add']);
+      $this->checkPermission(['admin','format.all','format.add']);
 
         $request->validate([
             'name'     => 'required|max:255',
@@ -77,7 +77,7 @@ class FormatController extends Controller
      */
     public function edit(Format $format)
     {
-      $this->checkPermission(['superadmin','format.all','format.edit']);
+      $this->checkPermission(['admin','format.all','format.edit']);
 
         return view('admin.format.edit', compact('format'));
     }
@@ -91,7 +91,7 @@ class FormatController extends Controller
      */
     public function update(Request $request, Format $format)
     {
-      $this->checkPermission(['superadmin','format.all','format.edit']);
+      $this->checkPermission(['admin','format.all','format.edit']);
 
         $request->validate([
             'name'     => 'required|max:255',
@@ -116,7 +116,7 @@ class FormatController extends Controller
    */
     public function destroy(Format $format)
     {
-      $this->checkPermission(['superadmin','format.all','format.delete']);
+      $this->checkPermission(['admin','format.all','format.delete']);
 
       if(Product::where('format_id', $format->id)->count() > 0){
         return redirect()->back()->with('Fmsg', 'Can\'t Delete, Item Exist In Product.');

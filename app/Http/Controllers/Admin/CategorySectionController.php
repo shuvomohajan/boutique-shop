@@ -41,7 +41,7 @@ class CategorySectionController extends Controller
   public function store(Request $request)
   {
     // dd($request->all());
-    $this->checkPermission(['superadmin']);
+    $this->checkPermission(['admin']);
     $request->validate([
       'name'           => 'required|max:255',
       'image'          => 'nullable|image|mimes:jpeg,png,jpg|max:512',

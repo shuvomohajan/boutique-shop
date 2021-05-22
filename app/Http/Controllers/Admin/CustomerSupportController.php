@@ -16,7 +16,7 @@ class CustomerSupportController extends Controller
      */
     public function index()
     {
-      $this->checkPermission(['superadmin','customer_service.all','customer_service.view']);
+      $this->checkPermission(['admin','customer_service.all','customer_service.view']);
       $customer_supports = CustomerSupport::all();
       return view('admin.customer_support.index', compact('customer_supports'));
     }
@@ -84,7 +84,7 @@ class CustomerSupportController extends Controller
      */
     public function destroy($id)
     {
-        $this->checkPermission(['superadmin','customer_service.all','customer_service.delete']);
+        $this->checkPermission(['admin','customer_service.all','customer_service.delete']);
         CustomerSupport::findOrFail($id)->delete();
         return back()->with('Smsg', 'Deleted Successfully.');
     }

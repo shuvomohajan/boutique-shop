@@ -14,7 +14,7 @@ class CompanySettingSeeder extends Seeder
     public function run()
     {
       CompanySetting::create([
-        'name' => 'Ebook'
+        'name' => 'Boutique Shop'
       ]);
       EcommerceSetting::create([
         'currency' => 'BDT'

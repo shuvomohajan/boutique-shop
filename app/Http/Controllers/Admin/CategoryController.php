@@ -19,7 +19,7 @@ class CategoryController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.add', 'category.view', 'category.edit', 'category.delete']);
+    $this->checkPermission(['admin', 'category.all', 'category.add', 'category.view', 'category.edit', 'category.delete']);
 
     $cats = Category::all();
     return response()->view('admin.category.index', compact('cats'));
@@ -32,7 +32,7 @@ class CategoryController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.add']);
+    $this->checkPermission(['admin', 'category.all', 'category.add']);
     return response()->view('admin.category.create');
   }
 
@@ -44,7 +44,7 @@ class CategoryController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.add']);
+    $this->checkPermission(['admin', 'category.all', 'category.add']);
     $request->validate([
       'name'        => 'required|string|max:255|unique:categories',
       'icon'        => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -92,7 +92,7 @@ class CategoryController extends Controller
    */
   public function edit($id)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.edit']);
+    $this->checkPermission(['admin', 'category.all', 'category.edit']);
     $cat = Category::find($id);
     return response()->view('admin.category.edit', compact('cat'));
   }
@@ -106,7 +106,7 @@ class CategoryController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.edit']);
+    $this->checkPermission(['admin', 'category.all', 'category.edit']);
     $request->validate([
       'name'        => 'required|string|max:255|unique:categories,id,' . $id,
       'icon'        => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -155,7 +155,7 @@ class CategoryController extends Controller
    */
   public function destroy($id)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.delete']);
+    $this->checkPermission(['admin', 'category.all', 'category.delete']);
 
     /*if (Product::where('category_id', $id)->count() > 0) {
       return redirect()->back()->with('Fmsg', 'Can\'t Delete, Item Exist In Product.');

@@ -17,7 +17,7 @@ class TagController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'tag.all', 'tag.add', 'tag.view', 'tag.edit', 'tag.delete']);
+    $this->checkPermission(['admin', 'tag.all', 'tag.add', 'tag.view', 'tag.edit', 'tag.delete']);
 
     $tags = Tag::all();
     return view('admin.tag.index', compact('tags'));
@@ -30,7 +30,7 @@ class TagController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'tag.all', 'tag.add']);
+    $this->checkPermission(['admin', 'tag.all', 'tag.add']);
 
     return view('admin.tag.create');
   }
@@ -43,7 +43,7 @@ class TagController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'tag.all', 'tag.add']);
+    $this->checkPermission(['admin', 'tag.all', 'tag.add']);
 
     $request->validate([
       'name'   => 'required|max:255',
@@ -88,7 +88,7 @@ class TagController extends Controller
    */
   public function edit(Tag $tag)
   {
-    $this->checkPermission(['superadmin', 'tag.all', 'tag.edit']);
+    $this->checkPermission(['admin', 'tag.all', 'tag.edit']);
 
     return view('admin.tag.edit', compact('tag'));
   }
@@ -102,7 +102,7 @@ class TagController extends Controller
    */
   public function update(Request $request, Tag $tag)
   {
-    $this->checkPermission(['superadmin', 'tag.all', 'tag.edit']);
+    $this->checkPermission(['admin', 'tag.all', 'tag.edit']);
 
     $request->validate([
       'name'   => 'required|max:255',
@@ -142,7 +142,7 @@ class TagController extends Controller
    */
   public function destroy(Tag $tag)
   {
-    $this->checkPermission(['superadmin', 'tag.all', 'tag.delete']);
+    $this->checkPermission(['admin', 'tag.all', 'tag.delete']);
 
     $filePath = 'storage/' . $tag->icon;
     if (File::exists($filePath)) {

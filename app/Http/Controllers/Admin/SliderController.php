@@ -17,7 +17,7 @@ class SliderController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'slider.all', 'slider.add', 'slider.view', 'slider.edit', 'slider.delete']);
+    $this->checkPermission(['admin', 'slider.all', 'slider.add', 'slider.view', 'slider.edit', 'slider.delete']);
     $sliders = Slider::all();
     return view('admin.slider.index', compact('sliders'));
   }
@@ -29,7 +29,7 @@ class SliderController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'slider.all', 'slider.add']);
+    $this->checkPermission(['admin', 'slider.all', 'slider.add']);
     return response()->view('admin.slider.create');
   }
 
@@ -42,7 +42,7 @@ class SliderController extends Controller
   public function store(Request $request)
   {
 //    dd($request->all());
-    $this->checkPermission(['superadmin', 'slider.all', 'slider.add']);
+    $this->checkPermission(['admin', 'slider.all', 'slider.add']);
     $request->validate([
       'image'       => 'required|image|mimes:jpeg,png,jpg|max:600',
       'title'       => 'nullable|string|max:255',
@@ -90,7 +90,7 @@ class SliderController extends Controller
    */
   public function edit(Slider $slider)
   {
-    $this->checkPermission(['superadmin', 'slider.all', 'slider.edit']);
+    $this->checkPermission(['admin', 'slider.all', 'slider.edit']);
     return view('admin.slider.edit', compact('slider'));
   }
 
@@ -103,7 +103,7 @@ class SliderController extends Controller
    */
   public function update(Request $request, Slider $slider)
   {
-    $this->checkPermission(['superadmin', 'slider.all', 'slider.edit']);
+    $this->checkPermission(['admin', 'slider.all', 'slider.edit']);
     $request->validate([
       'image'       => 'required|image|mimes:jpeg,png,jpg|max:600',
       'title'       => 'nullable|string|max:255',
@@ -147,7 +147,7 @@ class SliderController extends Controller
    */
   public function destroy(Slider $slider)
   {
-    $this->checkPermission(['superadmin', 'slider.all', 'slider.delete']);
+    $this->checkPermission(['admin', 'slider.all', 'slider.delete']);
     $filePath = 'storage/' . $slider->image;
     if (File::exists($filePath)) {
       File::delete($filePath);
@@ -160,13 +160,13 @@ class SliderController extends Controller
   public function bannerIndex()
   {
 
-      $this->checkPermission(['superadmin','slider-all', 'slider.add', 'slider.view', 'slider.edit', 'slider.delete']);
+      $this->checkPermission(['admin','slider-all', 'slider.add', 'slider.view', 'slider.edit', 'slider.delete']);
       $data['banner'] = Banner::first();
       return view('admin.banner.ads',$data);
   }
   public function createBanner(Request $request)
   {
-    $this->checkPermission(['superadmin','slider-all', 'slider.add', 'slider.view', 'slider.edit', 'slider.delete']);
+    $this->checkPermission(['admin','slider-all', 'slider.add', 'slider.view', 'slider.edit', 'slider.delete']);
       $banner = Banner::first();
       $fileUrl1 = isset($banner->banner1) ? $banner->banner1 : null;
       $fileUrl2 = isset($banner->banner2) ? $banner->banner2 : null;

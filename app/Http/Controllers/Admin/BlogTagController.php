@@ -15,7 +15,7 @@ class BlogTagController extends Controller
      */
     public function index()
     {
-      $this->checkPermission(['superadmin', 'blog-tag.all','blog-tag.view','blog-tag.delete']);
+      $this->checkPermission(['admin', 'blog-tag.all','blog-tag.view','blog-tag.delete']);
       $tags = BlogTag::all();
       return view('admin.post.postTags', compact('tags'));
     }
@@ -83,7 +83,7 @@ class BlogTagController extends Controller
      */
     public function destroy($id)
     {
-      $this->checkPermission(['superadmin', 'blog-tag.all', 'blog-tag.delete']);
+      $this->checkPermission(['admin', 'blog-tag.all', 'blog-tag.delete']);
       if(BlogTag::findOrFail($id)->delete()){
         return back()->with('Smsg', 'Tag Deleted Successfully.');
       }

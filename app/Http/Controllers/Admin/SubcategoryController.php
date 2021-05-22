@@ -18,7 +18,7 @@ class SubcategoryController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.add', 'category.view', 'category.edit', 'category.delete']);
+    $this->checkPermission(['admin', 'category.all', 'category.add', 'category.view', 'category.edit', 'category.delete']);
 
     $subcategories = Subcategory::all();
     return view('admin.subcategory.index', compact('subcategories'));
@@ -31,7 +31,7 @@ class SubcategoryController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.add']);
+    $this->checkPermission(['admin', 'category.all', 'category.add']);
 
     $categories = Category::where('status', 1)->get();
     return view('admin.subcategory.create', compact('categories'));
@@ -45,7 +45,7 @@ class SubcategoryController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.add']);
+    $this->checkPermission(['admin', 'category.all', 'category.add']);
 
     $request->validate([
       'name'        => 'required|max:255',
@@ -100,7 +100,7 @@ class SubcategoryController extends Controller
    */
   public function edit(Subcategory $subcategory)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.edit']);
+    $this->checkPermission(['admin', 'category.all', 'category.edit']);
 
     return view('admin.subcategory.edit', compact('subcategory'));
   }
@@ -114,7 +114,7 @@ class SubcategoryController extends Controller
    */
   public function update(Request $request, Subcategory $subcategory)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.edit']);
+    $this->checkPermission(['admin', 'category.all', 'category.edit']);
 
     $request->validate([
       'name'        => 'required|max:255',
@@ -169,7 +169,7 @@ class SubcategoryController extends Controller
    */
   public function destroy(Subcategory $subcategory)
   {
-    $this->checkPermission(['superadmin', 'category.all', 'category.delete']);
+    $this->checkPermission(['admin', 'category.all', 'category.delete']);
 
     /*if (Product::where('subcategory_id', $subcategory->id)->count() > 0) {
       return redirect()->back()->with('Fmsg', 'Can\'t Delete, Item Exist In Product.');

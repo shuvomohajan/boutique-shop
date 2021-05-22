@@ -18,7 +18,7 @@ class FeatureController extends Controller
      */
     public function index()
     {
-      $this->checkPermission(['superadmin','feature.all','feature.add','feature.view','feature.edit','feature.delete']);
+      $this->checkPermission(['admin','feature.all','feature.add','feature.view','feature.edit','feature.delete']);
         $features = Feature::all();
         return view('admin.feature.index', compact('features'));
     }
@@ -30,7 +30,7 @@ class FeatureController extends Controller
      */
     public function create()
     {
-      $this->checkPermission(['superadmin','feature.all','feature.add']);
+      $this->checkPermission(['admin','feature.all','feature.add']);
         $products = Product::where('status', 1)->get();
         return view('admin.feature.create', compact('products'));
     }
@@ -43,7 +43,7 @@ class FeatureController extends Controller
      */
     public function store(Request $request)
     {
-      $this->checkPermission(['superadmin','feature.all','feature.add']);
+      $this->checkPermission(['admin','feature.all','feature.add']);
         $request->validate([
             'name'           => 'required|max:255',
             'image'          => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -99,7 +99,7 @@ class FeatureController extends Controller
      */
     public function edit(Feature $feature)
     {
-      $this->checkPermission(['superadmin','feature.all','feature.edit']);
+      $this->checkPermission(['admin','feature.all','feature.edit']);
         $products       = Product::where('status', 1)->get();
         $oldProducts    = FeatureProducts::where('feature_id', $feature->id)->pluck('product_id');
         return view('admin.feature.edit', compact('feature', 'products', 'oldProducts'));
@@ -114,7 +114,7 @@ class FeatureController extends Controller
      */
     public function update(Request $request, Feature $feature)
     {
-      $this->checkPermission(['superadmin','feature.all','feature.edit']);
+      $this->checkPermission(['admin','feature.all','feature.edit']);
         $request->validate([
             'name'          => 'required|max:255',
             'image'         => 'nullable|image|mimes:jpeg,png,jpg',
@@ -175,7 +175,7 @@ class FeatureController extends Controller
      */
     public function destroy(Feature $feature)
     {
-      $this->checkPermission(['superadmin','feature.all','feature.delete']);
+      $this->checkPermission(['admin','feature.all','feature.delete']);
         $filePath = 'storage/' . $feature->image;
         if (File::exists($filePath)) {
             File::delete($filePath);

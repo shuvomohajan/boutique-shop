@@ -27,7 +27,7 @@ class ProductController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'product.all', 'product.add', 'product.view', 'product.edit', 'product.delete']);
+    $this->checkPermission(['admin', 'product.all', 'product.add', 'product.view', 'product.edit', 'product.delete']);
     $products = Product::all();
     return view('admin.product.index', compact('products'));
   }
@@ -39,7 +39,7 @@ class ProductController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'product.all', 'product.add']);
+    $this->checkPermission(['admin', 'product.all', 'product.add']);
     $categories = Category::where('status', 1)->get();
     $subjects = Subject::where('status', 1)->get();
     $tags = Tag::where('status', 1)->get();
@@ -59,7 +59,7 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'product.all', 'product.add']);
+    $this->checkPermission(['admin', 'product.all', 'product.add']);
     // dd($request->all());
     $request->validate([
       'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -247,7 +247,7 @@ class ProductController extends Controller
    */
   public function edit(Product $product)
   {
-    $this->checkPermission(['superadmin', 'product.all', 'product.edit']);
+    $this->checkPermission(['admin', 'product.all', 'product.edit']);
     $categories = Category::where('status', 1)->get();
     $subjects = Subject::where('status', 1)->get();
     $tags = Tag::where('status', 1)->get();
@@ -272,7 +272,7 @@ class ProductController extends Controller
    */
   public function update(Request $request, Product $product)
   {
-    $this->checkPermission(['superadmin', 'product.all', 'product.edit']);
+    $this->checkPermission(['admin', 'product.all', 'product.edit']);
     $request->validate([
       'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:512',
       'gallery'           => 'nullable|array',
@@ -480,7 +480,7 @@ class ProductController extends Controller
    */
   public function destroy(Product $product)
   {
-    $this->checkPermission(['superadmin', 'product.all', 'product.delete']);
+    $this->checkPermission(['admin', 'product.all', 'product.delete']);
     $filePath = 'storage/' . $product->image;
     if (File::exists($filePath)) {
       File::delete($filePath);

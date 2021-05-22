@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(TagSeeder::class);
 //        $this->call(FormatSeeder::class);
 //        $this->call(LanguageSeeder::class);
-//        $this->call(CategorySeeder::class);
+        $this->call(CategorySeeder::class);
 //        $this->call(SubjectSeeder::class);
 //        $this->call(ProductSeeder::class);
         $this->call(CompanySettingSeeder::class);

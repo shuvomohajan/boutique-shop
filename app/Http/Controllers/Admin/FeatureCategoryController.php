@@ -17,7 +17,7 @@ class FeatureCategoryController extends Controller
      */
     public function index()
     {
-      $this->checkPermission(['superadmin','feature-category.all','feature-category.add','feature-category.view','feature-category.edit','feature-category.delete']);
+      $this->checkPermission(['admin','feature-category.all','feature-category.add','feature-category.view','feature-category.edit','feature-category.delete']);
         $data['featureCategories']= FeatureCategory::all();
         return view('admin.featureCategory.index',$data);
     }
@@ -29,7 +29,7 @@ class FeatureCategoryController extends Controller
      */
     public function create()
     {
-      $this->checkPermission(['superadmin','feature-category.all','feature-category.add']);
+      $this->checkPermission(['admin','feature-category.all','feature-category.add']);
       $data['categories'] = Category::where('status',1)->get();
         return view('admin.featureCategory.create',$data);
     }
@@ -43,7 +43,7 @@ class FeatureCategoryController extends Controller
     public function store(Request $request)
     {
 
-        $this->checkPermission(['superadmin','feature-category.all','feature-category.add']);
+        $this->checkPermission(['admin','feature-category.all','feature-category.add']);
         $request->validate([
             'name'           => 'required|max:255',
             'image'          => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -90,7 +90,7 @@ class FeatureCategoryController extends Controller
      */
     public function edit($id)
     {
-      $this->checkPermission(['superadmin','feature-category.all','feature-category.edit']);
+      $this->checkPermission(['admin','feature-category.all','feature-category.edit']);
       $data['categories'] = Category::where('status',1)->get();
       $data['featureCategory'] = FeatureCategory::find($id);
       return view('admin.featureCategory.edit',$data);
@@ -105,7 +105,7 @@ class FeatureCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->checkPermission(['superadmin','feature-category.all','feature-category.edit']);
+      $this->checkPermission(['admin','feature-category.all','feature-category.edit']);
       $request->validate([
         'name'           => 'required|max:255',
         'image'          => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -142,7 +142,7 @@ class FeatureCategoryController extends Controller
      */
     public function destroy($id)
     {
-      $this->checkPermission(['superadmin','feature-category.all','feature-category.delete']);
+      $this->checkPermission(['admin','feature-category.all','feature-category.delete']);
       $featureCategory = FeatureCategory::find($id);
       $filePath = 'storage/' . $featureCategory->image;
         if (File::exists($filePath)) {

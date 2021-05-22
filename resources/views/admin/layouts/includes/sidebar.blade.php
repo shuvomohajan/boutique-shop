@@ -33,9 +33,7 @@
           </li>
         @endif
         @canany([
-        'superadmin','user.all','user.add','user.edit','user.view','user.delete','publisher.all','publisher.add','publisher.edit','publisher.view','publisher.delete',
-        'author.all','author.add','author.edit','author.view','author.delete'
-
+        'admin','user.all','user.add','user.edit','user.view','user.delete'
         ])
           <li
             class="kt-menu__item kt-menu__item--submenu {{ request()->is('dashboard/user*') ? 'kt-menu__item--open kt-menu__item--active' : null }}"
@@ -52,7 +50,7 @@
                                 <span class="kt-menu__link"><span class="kt-menu__link-text">User
                                         Management</span></span>
                 </li>
-                @canany(['superadmin','user.all','user.view','user.edit','user.delete','publisher.all','publisher.add','author.add','publisher.edit','publisher.view','publisher.delete','author.all','author.edit','author.delete','author.view'])
+                @canany(['admin','user.all','user.view','user.edit','user.delete'])
                   <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
                     <a href="{{ route('user.index') }}" class="kt-menu__link">
                       <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
@@ -63,7 +61,7 @@
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','publisher.all','publisher.create'])
+                @canany(['admin','user.all','user.create'])
 
                   <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
                     <a href="{{ route('user.create', ['type' => 'tailor']) }}" class="kt-menu__link">
@@ -75,20 +73,8 @@
                     </a>
                   </li>
                 @endcanany
-                {{--@canany(['superadmin','author.all','author.create'])
 
-                  <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
-                    <a href="{{ route('user.create', ['type' => 'author']) }}" class="kt-menu__link">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span
-                        class="kt-menu__link-text">Create Author</span>
-                    </a>
-                  </li>
-                @endcanany--}}
-
-                @canany(['superadmin'])
+                @canany(['admin'])
 
                   <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
                     <a href="{{ route('role.assign') }}" class="kt-menu__link">
@@ -105,7 +91,7 @@
             </div>
           </li>
         @endcanany
-        @canany(['superadmin','product.all','product.add','product.edit','product.delete','product.view',
+        @canany(['admin','product.all','product.add','product.edit','product.delete','product.view',
         'category.all','category.add','category.edit','category.delete','category.view',
         'subject.all','subject.add','subject.edit','subject.delete','subject.view',
         'feature.all','feature.add','feature.edit','feature.delete','feature.view',
@@ -129,7 +115,7 @@
                 <li class="kt-menu__item kt-menu__item--parent" aria-haspopup="true">
                   <span class="kt-menu__link"><span class="kt-menu__link-text">Product</span></span>
                 </li>
-                @canany(['superadmin','product.all','product.add','product.view','product.edit','product.delete',])
+                @canany(['admin','product.all','product.add','product.view','product.edit','product.delete',])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/product*') ? 'kt-menu__item--active' : null }}"
                     aria-haspopup="true">
@@ -140,7 +126,7 @@
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','category.all','category.add','category.view','category.edit','category.delete'])
+                @canany(['admin','category.all','category.add','category.view','category.edit','category.delete'])
 
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/category*') ? 'kt-menu__item--active' : null }}"
@@ -152,7 +138,7 @@
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','category.all','category.add','category.view','category.edit','category.delete'])
+                @canany(['admin','category.all','category.add','category.view','category.edit','category.delete'])
 
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/subcategory*') ? 'kt-menu__item--active' : null }}"
@@ -164,7 +150,7 @@
                     </a>
                   </li>
                 @endcanany
-                {{--@canany(['superadmin','subject.all','subject.add','subject.view','subject.edit','subject.delete'])
+                {{--@canany(['admin','subject.all','subject.add','subject.view','subject.edit','subject.delete'])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/subject*') ? 'kt-menu__item--active' : null }}"
                     aria-haspopup="true">
@@ -175,7 +161,7 @@
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','format.all','format.add','format.view','format.edit','format.delete'])
+                @canany(['admin','format.all','format.add','format.view','format.edit','format.delete'])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/format*') ? 'kt-menu__item--active' : null }}"
                     aria-haspopup="true">
@@ -186,7 +172,7 @@
                     </a>
                   </li>
                 @endcanany
-                @canany(['superadmin','language.all','language.add','language.view','language.edit','language.delete'])
+                @canany(['admin','language.all','language.add','language.view','language.edit','language.delete'])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/language*') ? 'kt-menu__item--active' : null }}"
                     aria-haspopup="true">
@@ -197,7 +183,7 @@
                     </a>
                   </li>
                 @endcanany--}}
-                @canany(['superadmin','tag.all','tag.add','tag.view','tag.edit','tag.delete'])
+                @canany(['admin','tag.all','tag.add','tag.view','tag.edit','tag.delete'])
                   <li
                     class="kt-menu__item kt-menu__item {{ request()->is('dashboard/tag*') ? 'kt-menu__item--active' : null }}"
                     aria-haspopup="true">
@@ -230,7 +216,7 @@
             </div>
           </li>
         @endcanany
-        {{-- @canany(['superadmin','blog.all', 'post.create','post.edit','post.view','post.delete'])
+        {{-- @canany(['admin','blog.all', 'post.create','post.edit','post.view','post.delete'])
           <li
             class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/post*', 'dashboard/post_tag*', 'dashboard/post_category*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
             aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
@@ -269,7 +255,7 @@
             </div>
           </li>
         @endcanany --}}
-        @canany(['superadmin','customer_support.all','customer_support.delete','customer_support.view'])
+        @canany(['admin','customer_support.all','customer_support.delete','customer_support.view'])
           <li class="kt-menu__item" aria-haspopup="true">
             <a href="{{ route('customer_support.index') }}" class="kt-menu__link"><i
                 class="kt-menu__link-icon fas fa-truck"></i>
@@ -278,7 +264,7 @@
             </a>
           </li>
         @endcanany
-        @canany(['superadmin','order.all'])
+        @canany(['admin','order.all'])
           <li class="kt-menu__item" aria-haspopup="true">
             <a href="{{ route('order.index') }}" class="kt-menu__link"><i
                 class="kt-menu__link-icon fas fa-truck"></i>
@@ -287,7 +273,7 @@
             </a>
           </li>
         @endcanany
-        @canany(['superadmin','settings.all'])
+        @canany(['admin','settings.all'])
           <li
             class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/company_settings*', 'dashboard/ecommerce_setting*', 'dashboard/slider*', 'dashboard/banner*', 'dashboard/categorysection*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
             aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
@@ -362,7 +348,7 @@
             </div>
           </li>
         @endcanany
-        {{--@canany(['superadmin', 'report.all'])
+        {{--@canany(['admin', 'report.all'])
           <li
             class="kt-menu__item kt-menu__item--submenu {{ request()->is(['dashboard/report*']) ? 'kt-menu__item--open kt-menu__item--active' : null }}"
             aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
@@ -418,7 +404,7 @@
           $auth = Auth::user()->type;
         @endphp
 
-        @if ( $auth == 'user'||$auth == 'author'||$auth == 'publisher')
+        @if ( $auth == 'user' || $auth == 'tailor')
           <li class="kt-menu__item {{ request()->is('dashboard/order*') ? 'kt-menu__item--active' : null }}" aria-haspopup="true">
             <a href="{{ route('user.orders',Auth::id()) }}" class="kt-menu__link"><i
                 class="kt-menu__link-icon fas fa-truck"></i>

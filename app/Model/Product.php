@@ -67,24 +67,14 @@ class Product extends Model
     {
         return $this->hasMany(ProductTag::class);
     }
+
     public function FeatureProducts()
     {
       return $this->belongsToMany(FeatureProducts::class);
-    }
-    public function Author()
-    {
-      return $this->belongsTo(User::class,'author_id','id');
-    }
-    public function Publisher()
-    {
-      return $this->belongsTo(User::class,'publisher_id','id');
     }
 
     public function Reviews()
     {
         return $this->hasMany(Review::class);
     }
-    // public function Orders(){
-    //   return $this->belongsToMany(Product::class);
-    // }
 }

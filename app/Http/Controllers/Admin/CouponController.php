@@ -18,7 +18,7 @@ class CouponController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['superadmin', 'coupon.all', 'coupon.add', 'coupon.view', 'coupon.edit', 'coupon.delete']);
+    $this->checkPermission(['admin', 'coupon.all', 'coupon.add', 'coupon.view', 'coupon.edit', 'coupon.delete']);
     $coupons = Coupon::all();
     return view('admin.coupon.index', compact('coupons'));
   }
@@ -30,7 +30,7 @@ class CouponController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['superadmin', 'coupon.all', 'coupon.add']);
+    $this->checkPermission(['admin', 'coupon.all', 'coupon.add']);
     $products = Product::where('status', 1)->get();
     return view('admin.coupon.create', compact('products'));
   }
@@ -43,7 +43,7 @@ class CouponController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['superadmin', 'coupon.all', 'coupon.add']);
+    $this->checkPermission(['admin', 'coupon.all', 'coupon.add']);
     $request->validate([
       'code'         => 'required',
       'product_id'   => 'required|array',
@@ -90,7 +90,7 @@ class CouponController extends Controller
    */
   public function edit(Coupon $coupon)
   {
-    $this->checkPermission(['superadmin', 'coupon.all', 'coupon.edit']);
+    $this->checkPermission(['admin', 'coupon.all', 'coupon.edit']);
     $products    = Product::where('status', 1)->get();
     $oldProducts = CouponProduct::where('coupon_id', $coupon->id)->pluck('product_id');
     return view('admin.coupon.edit', compact('coupon', 'products', 'oldProducts'));
@@ -105,7 +105,7 @@ class CouponController extends Controller
    */
   public function update(Request $request, Coupon $coupon)
   {
-    $this->checkPermission(['superadmin', 'coupon.all', 'coupon.edit']);
+    $this->checkPermission(['admin', 'coupon.all', 'coupon.edit']);
     $request->validate([
       'code'         => 'required',
       'product_id'   => 'required|array',
@@ -155,7 +155,7 @@ class CouponController extends Controller
    */
   public function destroy(Coupon $coupon)
   {
-    $this->checkPermission(['superadmin', 'coupon.all', 'coupon.delete']);
+    $this->checkPermission(['admin', 'coupon.all', 'coupon.delete']);
     $coupon->delete();
 
     return redirect()->back()->with('Smsg', 'Delete Successfully.');
