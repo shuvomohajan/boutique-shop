@@ -255,6 +255,15 @@
             </div>
           </li>
         @endcanany --}}
+        @canany(['admin','custom_product.all','custom_product.delete','custom_product.view'])
+          <li class="kt-menu__item" aria-haspopup="true">
+            <a href="{{ route('custom_product.index') }}" class="kt-menu__link"><i
+                class="kt-menu__link-icon fas fa-truck"></i>
+              <span
+                class="kt-menu__link-text">Custom Product Requests</span>
+            </a>
+          </li>
+        @endcanany
         @canany(['admin','customer_support.all','customer_support.delete','customer_support.view'])
           <li class="kt-menu__item" aria-haspopup="true">
             <a href="{{ route('customer_support.index') }}" class="kt-menu__link"><i

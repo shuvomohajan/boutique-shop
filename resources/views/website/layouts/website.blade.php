@@ -96,7 +96,7 @@
               @if(isset($companyInfo->logo))
               <img src="{{asset('storage/' . $companyInfo->logo )}}" alt="{{ $companyInfo->name }}">
               @else
-              <img src="" alt="{{ $companyInfo->name }}">
+              <h4 class="text-white">{{ $companyInfo->name }}</h4>
               @endif
             </a>
           </div>
@@ -162,14 +162,13 @@
     <div class="container">
       <div class="row">
         <!-- Begin Header Bottom Menu Area -->
-        <div class="col-lg-10 d-none d-lg-block d-xl-block">
+        <div class="col-lg-10 d-none d-lg-block">
           <!-- FB's Navigation -->
           <nav class="fb-navigation">
             <ul>
               <li class="active">
                 <a href="{{ url('/') }}">Home</a>
               </li>
-
 
               <li class="megamenu-holder">
                 <a href="javascript:">Category</a>
@@ -205,6 +204,9 @@
               </li>
               <li>
                 <a href="{{ url('customer_support') }}">Contact</a>
+              </li>
+              <li>
+                <a href="{{ route('custom_product') }}">Custom Product</a>
               </li>
             </ul>
           </nav>
@@ -295,8 +297,12 @@
           </div>
           <div class="col-md-4">
             <div class="footer-widget-logo pt-30 mb-20 pt-sm-5 pt-xs-5">
-              <a href="index.html">
-                <img src="{{asset('storage/' . $companyInfo->footer_logo )}}" alt="{{ $companyInfo->name }}">
+              <a href="{{ url('/') }}">
+                @if($companyInfo->footer_logo)
+                  <img src="{{ asset('storage/' . $companyInfo->footer_logo) }}" alt="{{ $companyInfo->name }}">
+                @else
+                  <h4>{{ $companyInfo->name }}</h4>
+                @endif
               </a>
             </div>
             <div class="footer-widget-info">
@@ -352,105 +358,12 @@
             <span>Copyright &copy; 2021 <a href="{{ url('/') }}">{{ $companyInfo->name }}.</a> All rights reserved.</span>
           </div>
         </div>
-        <!-- Copyright Area End Here -->
-        <!-- Begin Footer Bottom Menu Area -->
-        {{-- <div class="col-lg-6 col-md-6">
-          <div class="fotter-bottom_menu fotter-bottom_menu-3 text-right copyright copyright-3">
-            <span>Developed By <a href=""></a></span>
-          </div>
-        </div> --}}
-        <!-- Footer Bottom Menu Area End Here -->
       </div>
     </div>
   </div>
   <!-- Footer Bottom Area End Here -->
 </div>
-<!-- FB's Footer Area End Here -->
-<!-- Begin Fb's Quick View | Modal Area -->
-{{--<div class="modal fade modal-wrapper" id="exampleModalCenter">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body pt-15 pb-30 pt-sm-10 pb-sm-30 pb-xs-50">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="modal-inner-area row">
-          <div class="col-lg-5 col-md-5 col-sm-5">
-            <!-- Product Details Left -->
-            <div class="product-details-left">
-              <div class="product-details-images slider-navigation-1">
-                <div class="lg-image">
-                  <img src="{{asset('assets/frontend/Images/single-product/large-size/1.jpg')}}" alt="Single Product Image">
-                </div>
-                <div class="lg-image">
-                  <img src="{{asset('assets/frontend/Images/single-product/large-size/2.jpg')}}" alt="Single Product Image">
-                </div>
-                <div class="lg-image">
-                  <img src="{{asset('assets/frontend/Images/single-product/large-size/3.jpg')}}" alt="Single Product Image">
-                </div>
-                <div class="lg-image">
-                  <img src="{{asset('assets/frontend/Images/single-product/large-size/4.jpg')}}" alt="Single Product Image">
-                </div>
-              </div>
-              <div class="product-details-thumbs">
-                <div class="sm-image"><img src="{{asset('assets/frontend/Images/single-product/small-size/1.jpg')}}" alt="Single Product Thumb">
-                </div>
-                <div class="sm-image"><img src="{{asset('assets/frontend/Images/single-product/small-size/2.jpg')}}" alt="Single Product Thumb">
-                </div>
-                <div class="sm-image"><img src="{{asset('assets/frontend/Images/single-product/small-size/3.jpg')}}" alt="Single Product Thumb">
-                </div>
-                <div class="sm-image"><img src="{{asset('assets/frontend/Images/single-product/small-size/4.jpg')}}" alt="Single Product Thumb">
-                </div>
-              </div>
-            </div>
-            <!--// Product Details Left -->
-          </div>
-          <div class="col-lg-7 col-md-7 col-sm-7">
-            <div class="product-details-view-content pt-40 pt-sm-25">
-              <div class="product-info">
-                <h2>Printed Dress</h2>
-                <div class="price-box pb-20">
-                  <span class="new-price new-price-2">$57.98</span>
-                  <span class="old-price">$57.98</span>
-                </div>
-                <div class="sticker-2">Save 8%</div>
-                <div class="product-desc">
-                  <p>
-                      <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom.
-                      </span>
-                  </p>
-                </div>
-                <div class="product-variants">
-                  <div class="produt-variants-size">
-                    <label>Dimension</label>
-                    <select class="nice-select">
-                      <option value="1" title="S" selected="selected">S</option>
-                      <option value="2" title="M">M</option>
-                      <option value="3" title="L">L</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="single-add-to-cart">
-                  <form action="#" class="cart-quantity">
-                    <div class="quantity">
-                      <label>Quantity</label>
-                      <div class="cart-plus-minus">
-                        <input class="cart-plus-minus-box" value="1" type="text">
-                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                      </div>
-                    </div>
-                    <button class="fb-btn" type="submit">Add to cart</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>--}}
+
 
 @if (session('message'))
   <div class="alert alert-dismissible fade show bg-white" style="position: fixed; top: 20px; right: 20px; z-index: 1000; max-width: 400px;">
@@ -651,175 +564,6 @@
     });
   });
 
-  /*function logincheck() {
-    $.ajax({
-      method: "get",
-      url: "{{--{{ route('login_check') }}--}}",
-      dataType: "json",
-      success: function (res) {
-        if (res.status == 1) {
-          localStorage.setItem("logged", 1);
-        } else {
-          localStorage.setItem("logged", 0);
-        }
-      }
-    });
-    StoreFav();
-  }*/
-
-
-  /*
-  =====================================
-  * favorite start
-  =====================================
-  * */
-  /*function StoreFav() {
-    if (localStorage.getItem("logged") == 1) {
-      var datas = JSON.parse(localStorage.getItem("favorite"));
-      if (datas != null) {
-        var len = datas.length;
-        for (var j = 0; j < len; j++) {
-          var product_id = datas[j]["product_id"];
-          $.ajax({
-            method: "post",
-            url: "{{--{{ route('cart.favourite_storage') }}--}}",
-            data: {product_id: product_id, _token: "{{--{{ csrf_token() }}--}}"},
-            dataType: "json",
-            success: function (res) {
-              //console.log(res.status);
-              datas.splice($.inArray(j, datas), 1);
-              console.log(datas.length);
-              localStorage.setItem("favorite", JSON.stringify(datas));
-              isEmpty();
-            }
-          });
-        }
-        MyFavourite();
-      }
-    } else {
-      var datas = JSON.parse(localStorage.getItem("favorite"));
-      //console.log(datas.length);
-      if (datas != null) {
-        $("#fav").text(datas.length);
-        for (var j = 0; j < datas.length; j++) {
-          var product_id = datas[j]["product_id"];
-
-          $(".favourite" + product_id).hide();
-          $(".added" + product_id).removeClass("d-none");
-        }
-      } else {
-        $("#fav").text(0);
-      }
-    }
-  }
-
-  function MyFavourite() {
-    $.ajax({
-      method: "get",
-      url: "{{--{{ route('login_check') }}--}}",
-      dataType: "json",
-      success: function (res) {
-        if (res.status == 1) {
-          if (res.items != null) {
-            $("#fav").text(res.items.length);
-            $(res.items).each(function (index, item) {
-              $(".favourite" + item.product_id).hide();
-              $(".added" + item.product_id).removeClass("d-none");
-            });
-          } else {
-            $("#fav").text(0);
-          }
-        }
-      }
-    });
-  }
-
-  /!* Add to favourite List *!/
-  $(document).on("click", ".favourites-btn", function () {
-    var product_id = $(this).attr("data-id");
-    var name = $(this).data("name");
-    if (name == "unchecked") {
-      $(".favourite" + product_id).hide();
-      $(".added" + product_id).removeClass("d-none");
-    } else {
-      $(".favourite" + product_id).show();
-      $(".added" + product_id).addClass("d-none");
-    }
-
-    if (localStorage.getItem("logged") == 1) {
-      $.ajax({
-        method: "post",
-        url: "{{--{{ route('cart.favourite') }}--}}",
-        data: {product_id: product_id, _token: "{{--{{ csrf_token() }}--}}"},
-        dataType: "json",
-        success: function (res) {
-          MyFavourite();
-        }
-      });
-    } else {
-      const products = [
-        {
-          product_id: product_id
-        }
-      ];
-
-      var items = localStorage.getItem("favorite");
-
-      if (!items) {
-        localStorage.setItem("favorite", JSON.stringify(products));
-      } else {
-        var found = isExist(product_id);
-        if (found != true) {
-          var items = [];
-          items = JSON.parse(localStorage.getItem("favorite"));
-          items.push(products[0]);
-          localStorage.setItem("favorite", JSON.stringify(items));
-        }
-      }
-    }
-    favorites();
-  });
-
-  function favorites() {
-    var items = localStorage.getItem("favorite");
-    console.log(items);
-
-    var datas = JSON.parse(localStorage.getItem("favorite"));
-    if (datas != null) {
-      $("#fav").text(datas.length);
-    } else {
-      $("#fav").text(0);
-    }
-  }
-
-  function isExist(id) {
-    var datas = JSON.parse(localStorage.getItem("favorite"));
-    var response = true;
-    for (var j = 0; j < datas.length; j++) {
-      if (id == datas[j]["product_id"]) {
-        datas.splice(j, 1);
-        response = true;
-        break;
-      } else {
-        response = false;
-      }
-    }
-    localStorage.setItem("favorite", JSON.stringify(datas));
-    isEmpty();
-    return response;
-  }
-
-  function isEmpty() {
-    var items = localStorage.getItem("favorite");
-    if (items && items.length == 2) {
-      localStorage.removeItem("favorite");
-    }
-  }*/
-  /*
-  =====================================
-  * favorite end
-  =====================================
-  * */
 
   $(document).on("keyup", ".mySearch", function (e) {
     var searchbox = $("#searchKey");

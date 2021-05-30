@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\User;
-use App\Model\Review;
-use App\Model\Product;
-use App\Model\Subject;
+use App\Http\Controllers\Controller;
 use App\Model\Category;
-use App\Model\Subcategory;
+use App\Model\Product;
+use App\Model\Review;
+use App\Model\Subject;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -58,9 +57,9 @@ class ProductController extends Controller
       if (request()->has('subcategories')) {
         $subProducts = DB::table('product_subcategory')->whereIn('subcategory_id', $request->subcategories)->groupBy('product_id')->pluck('product_id');
       }
-      $products = Product::join('category_product','category_product.product_id','=','products.id')->where('category_product.category_id',$id)
+      $products = Product::join('category_product', 'category_product.product_id', '=', 'products.id')->where('category_product.category_id', $id)
         ->when(request()->has('subcategories'), function ($query) use ($subProducts) {
-          return Product::whereIn('id',$subProducts);
+          return Product::whereIn('id', $subProducts);
         })
         ->when(request()->has('languages'), function ($query) use ($language_id) {
           return $query->whereIn('language_id', $language_id);
@@ -80,7 +79,7 @@ class ProductController extends Controller
 
       $products = Product::where($for . '_id', $id)
         ->when(request()->has('categories'), function ($query) use ($category_id) {
-          return $query->join('category_product','category_product.product_id','=','products.id')->whereIn('category_product.category_id',$category_id);
+          return $query->join('category_product', 'category_product.product_id', '=', 'products.id')->whereIn('category_product.category_id', $category_id);
         })
         ->when(request()->has('languages'), function ($query) use ($language_id) {
           return $query->whereIn('language_id', $language_id);
@@ -106,11 +105,8 @@ class ProductController extends Controller
 
   public function productDetails($id)
   {
-    $data['product'] = Product::find($id);
-    $subject_id = $data['product']->subject_id;
-    $data['relatedProducts'] = Product::where('subject_id', $subject_id)->take(12)->get();
-    // dd($data['relatedProducts']);
-    $data['reviews'] = Review::where('product_id', $id)->orderBy('created_at', 'desc')->paginate(10);
+    $data['product'] = Product::findOrFail($id);
+    $data['reviews'] = Review::where('product_id', $id)->orderBy('id', 'desc')->paginate(10);
     return view('website.product_details', $data);
   }
 }

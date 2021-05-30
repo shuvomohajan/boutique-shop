@@ -29,15 +29,15 @@
                 <div class="pdetails-images">
                   <div class="pdetails-largeimages pdetails-imagezoom">
                     <div class="pdetails-singleimage"
-                         data-src="{{ asset('storage/' . ($product->image ? $product->image : 'images/default.png' )) }}">
-                      <img class="primary-img" src="{{ asset('storage/' . ($product->image ? $product->image : 'images/default.png' )) }}"
+                         data-src="{{ asset('storage/' . ($product->image ?? 'images/default.png' )) }}">
+                      <img class="primary-img" src="{{ asset('storage/' . ($product->image ?? 'images/default.png' )) }}"
                            alt="FB'S Prduct">
                     </div>
-                    @if ($product->gallery != null)
+                    @if (isset($product->gallery))
                       @foreach (explode(',',$product->gallery) as $gallery)
                         <div class="pdetails-singleimage"
-                             data-src="{{ asset('storage/' . ($gallery ? $gallery : 'images/default.png' )) }}">
-                          <img class="primary-img" src="{{ asset('storage/' . ($gallery ? $gallery : 'images/default.png' )) }}"
+                             data-src="{{ asset('storage/' . ($gallery ?? 'images/default.png' )) }}">
+                          <img class="primary-img" src="{{ asset('storage/' . ($gallery ?? 'images/default.png' )) }}"
                                alt="FB'S Prduct">
                         </div>
                       @endforeach
@@ -46,13 +46,13 @@
 
                   <div class="pdetails-thumbs">
                     <div class="pdetails-singlethumb">
-                      <img class="primary-img" src="{{ asset('storage/' . ($product->image ? $product->image : 'images/default.png' )) }}"
+                      <img class="primary-img" src="{{ asset('storage/' . ($product->image ?? 'images/default.png' )) }}"
                            alt="FB'S Prduct">
                     </div>
-                    @if ($product->gallery != null)
+                    @if (isset($product->gallery))
                       @foreach (explode(',',$product->gallery) as $gallery)
                         <div class="pdetails-singlethumb">
-                          <img src="{{ asset('storage/' . ($gallery ? $gallery : 'images/default.png' )) }}" alt="product thumb">
+                          <img src="{{ asset('storage/' . ($gallery ?? 'images/default.png' )) }}" alt="product thumb">
                         </div>
                       @endforeach
                     @endif
@@ -88,7 +88,7 @@
                       @if (Illuminate\Support\Carbon::parse($product->created_at)->diffInDays(Illuminate\Support\Carbon::now()) <= $days)
                         <div class="badge badge-success"><span>New</span></div>
                       @endif
-                      @if ($product->discount != null)
+                      @if (isset($product->discount))
                         <div class="badge badge-danger">
                           <span>{{ $product->discount }}%</span>
                         </div>
@@ -231,7 +231,7 @@
                           <div class="col-lg-6">
                             <div class="fb-review-product">
                               <img class="primary-img"
-                                   src="{{ asset('storage/' . ($product->image ? $product->image : 'images/default.png' )) }}"
+                                   src="{{ asset('storage/' . ($product->image ?? 'images/default.png' )) }}"
                                    alt="FB'S Prduct">
                               <div class="fb-review-product-desc">
                                 <p class="fb-product-name">{{ $product->name }}</p>

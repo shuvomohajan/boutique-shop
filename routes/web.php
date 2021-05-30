@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\SslCommerzPaymentController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +55,7 @@ Route::namespace('Admin')->prefix('dashboard')->middleware('auth')->group(functi
   Route::resource('feature-category', 'FeatureCategoryController');
   Route::resource('categorysection', 'CategorySectionController');
   Route::resource('address', 'ShippingAddressController');
+  Route::get('custom_product', 'DashboardController@customProduct')->name('custom_product.index');
   Route::get('banner', 'SliderController@bannerIndex')->name('ads.banner');
   Route::post('banner', 'SliderController@createBanner')->name('store.banner');
   Route::post('order/status', 'OrderController@changeStatus')->name('order.status');
@@ -83,9 +84,7 @@ Route::namespace('Web')->middleware('web')->group(function () {
   });
 
   Route::get('/', 'WebController@index');
-   // cashpayment
-   Route::resource('cash', 'CashController');
-   // cashpayment
+  Route::resource('cash', 'CashController');
   Route::get('faq', 'WebController@faq');
   Route::get('cart', 'WebController@Cart');
   Route::get('compare', 'WebController@compare');
@@ -102,6 +101,8 @@ Route::namespace('Web')->middleware('web')->group(function () {
   Route::get('privacy_policy', 'WebController@privacy_policy');
   Route::get('refund', 'WebController@refund');
   Route::get('return', 'WebController@return');
+  Route::get('custom_product', 'CustomProductController@index')->name('custom_product');
+  Route::post('custom_product', 'CustomProductController@store')->name('custom_product.store')->middleware('auth');
   //Blog Links
   Route::get('all_posts', 'WebController@all_posts')->name('allPost.index');
   Route::get('all_posts/tag/{id}', 'WebController@all_posts_with_tag')->name('post.by_tag');
