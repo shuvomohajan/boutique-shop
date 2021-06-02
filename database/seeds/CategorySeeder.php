@@ -15,50 +15,67 @@ class CategorySeeder extends Seeder
   {
     $data = [
       [
-        'category'    => 'Commerce',
+        'category'    => 'Pakhistani Dress',
         'subcategory' => [
-          'Business Studies',
-          'Entrepreneurship',
-          'Marketing',
-          'E-Commerce',
-          'Management',
+          'Pakhistani Lawn',
+          'Pakhistani Slik',
+          'Pakhistani Cotton',
+          'Pakhistani jamdani',
+          'Pakhistani  kurti',
         ]
       ], [
-        'category'    => 'Humanities',
+        'category'    => 'Indian Dress',
         'subcategory' => [
-          'Archeology',
-          'History',
-          'Theater, Music and Dance',
-          'Folklore',
-          'Literature',
+          'Indian Lawn',
+          'Indian Slik',
+          'Jamdani, Cotton and Katan',
+          'Kurti',
         ]
       ], [
-        'category'    => 'Sciences',
+        'category'    => 'Lakhno ',
         'subcategory' => [
-          'Astronomy',
-          'Chemistry',
-          'Physics',
-          'Biology',
-          'Computer Science',
+          'Lakhno Gown',
+          'Lakhno Cotton',
         ]
       ], [
-        'category'    => 'Social Studies',
+        'category'    => 'Party Dress',
         'subcategory' => [
-          'Anthropology',
-          'Geography and Environment',
-          'Sociology',
-          'Economics',
-          'Political Science',
+          'Party Sequence Dress',
+          'Slik',
+          'Cotton',
+          'Benaroshi ',
         ]
       ], [
-        'category'    => 'Others',
+        'category'    => 'Boutiques Dress',
         'subcategory' => [
-          'Agriculture',
-          'Current Affairs',
-          'My Country',
-          'Biography',
-          'Health and Fitness',
+          'Boutique Cotton',
+          'Boutique Jamdani',
+          'Boutique Embroidery',
         ]
+      ], [
+        'category' => 'Sawrvaski Slik',
+        'subcategory' => []
+      ], [
+        'category'    => 'Chiken Dress',
+        'subcategory' => [
+          'Chiken Cotton',
+          'Chiken Slik',
+        ]
+      ], [
+        'category'    => 'Embroidery Dress',
+        'subcategory' => [
+          'Embroidery Cotton',
+          'Embroidery Slik',
+        ]
+      ], [
+        'category' => 'Moslin Dress',
+        'subcategory' => []
+      ], [
+        'category' => 'Kashmiri Dress',
+        'subcategory' => []
+      ], [
+        'category' => 'New Churni Dress',
+        'subcategory' => []
       ]
     ];
 

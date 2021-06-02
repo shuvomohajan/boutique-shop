@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8"/>
 
-  <title>{{ $companyInfo->name }}</title>
+  <title>{{ companyInfo()->name }}</title>
   <meta name="description" content="Latest updates and statistic charts">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -31,7 +31,7 @@
 <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed" style="background-color: #f2f3f8;">
   <div class="kt-header-mobile__logo">
     <a href="/">
-      <img alt="{{ $companyInfo->name }}" src="{{ asset('storage/' . $companyInfo->logo) }}" style="height: 30px; width: auto"/>
+      <img alt="{{ companyInfo()->name }}" src="{{ asset('storage/' . companyInfo()->logo) }}" style="height: 30px; width: auto"/>
     </a>
   </div>
   <div class="kt-header-mobile__toolbar">

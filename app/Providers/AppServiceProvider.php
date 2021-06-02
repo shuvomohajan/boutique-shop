@@ -32,12 +32,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
-        $data['categories'] = Category::where('status', 1)->get();
-        $data['minPrice']  = Product::min('regular_price');
-        $data['maxPrice']  = Product::max('regular_price');
-        $data['companyInfo']  = CompanySetting::first();
-
-        View::share($data);
     }
 }

@@ -41,14 +41,11 @@ class ProductController extends Controller
   {
     $this->checkPermission(['admin', 'product.all', 'product.add']);
     $categories = Category::where('status', 1)->get();
-    $subjects = Subject::where('status', 1)->get();
     $tags = Tag::where('status', 1)->get();
-    $formats = Format::where('status', 1)->get();
-    $languages = Language::where('status', 1)->get();
     $features = Feature::where('status', 1)->get();
     $sku = '#' . chr(rand(65, 90)) . date('Y') . intval('0' . rand(1, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9));
 
-    return view('admin.product.create', compact('categories', 'subjects', 'tags', 'formats', 'languages', 'features', 'sku'));
+    return view('admin.product.create', compact('categories',  'tags',   'features', 'sku'));
   }
 
   /**
@@ -79,9 +76,6 @@ class ProductController extends Controller
       'category_id.*'     => 'required|string',
       'subcategory_id'    => 'nullable|array',
       'subcategory_id.*'  => 'nullable|string',
-      'subject_id'        => 'nullable|integer',
-      'format_id'         => 'nullable|integer',
-      'language_id'       => 'nullable|integer',
       'tag_id'            => 'nullable|array',
       'tag_id.*'          => 'nullable|string|distinct',
       'features'          => 'nullable|array',
@@ -101,30 +95,6 @@ class ProductController extends Controller
     if ($request->hasFile('image')) {
       $filePath = Rand() . '.' . $request->image->getClientOriginalExtension();
       $filePath = $request->image->storeAs('images/product_img', $filePath, 'public');
-    }
-
-    // dynamic subject entry
-    if ($request->input('subject_id') && !Subject::find($request->input('subject_id'))) {
-      $newSubject = Subject::create([
-        'name' => $request->input('subject_id'),
-      ]);
-      $request->subject_id = $newSubject->id;
-    }
-
-    // dynamic format entry
-    if ($request->input('format_id') && !Format::find($request->input('format_id'))) {
-      $newFormat = Format::create([
-        'name' => $request->input('format_id'),
-      ]);
-      $request->format_id = $newFormat->id;
-    }
-
-    // dynamic language entry
-    if ($request->input('language_id') && !Language::find($request->input('language_id'))) {
-      $newLanguage = Language::create([
-        'name' => $request->input('language_id'),
-      ]);
-      $request->language_id = $newLanguage->id;
     }
 
     $keyWords = null;
@@ -158,9 +128,6 @@ class ProductController extends Controller
       'discount'          => $request->input('discount'),
       'short_description' => $request->input('short_description'),
       'full_description'  => $request->input('full_description'),
-      'format_id'         => $request->format_id,
-      'language_id'       => $request->language_id,
-      'subject_id'        => $request->subject_id,
       'sku'               => $request->input('sku'),
       'seo_key_word'      => rtrim($request->seo_key_word, ','),
     ]);
@@ -249,10 +216,7 @@ class ProductController extends Controller
   {
     $this->checkPermission(['admin', 'product.all', 'product.edit']);
     $categories = Category::where('status', 1)->get();
-    $subjects = Subject::where('status', 1)->get();
     $tags = Tag::where('status', 1)->get();
-    $formats = Format::where('status', 1)->get();
-    $languages = Language::where('status', 1)->get();
     $oldTags = ProductTag::where('product_id', $product->id)->pluck('tag_id');
     $features = Feature::where('status', 1)->get();
     $oldFeatures = FeatureProducts::where('product_id', $product->id)->pluck('feature_id');
@@ -260,7 +224,7 @@ class ProductController extends Controller
     $old_seo_key_word = collect(explode(',', $product->seo_key_word));
     $old_gallery = collect(explode(',', $product->gallery));
 
-    return view('admin.product.edit', compact('product', 'old_seo_key_word', 'old_gallery', 'categories', 'subjects', 'tags', 'oldTags', 'features', 'oldFeatures', 'formats', 'languages'));
+    return view('admin.product.edit', compact('product', 'old_seo_key_word', 'old_gallery', 'categories',  'tags', 'oldTags', 'features', 'oldFeatures',  ));
   }
 
   /**
@@ -291,9 +255,6 @@ class ProductController extends Controller
       'category_id.*'     => 'required|string',
       'subcategory_id'    => 'nullable|array',
       'subcategory_id.*'  => 'nullable|string',
-      'subject_id'        => 'nullable|integer',
-      'format_id'         => 'nullable|integer',
-      'language_id'       => 'nullable|integer',
       'tag_id'            => 'nullable|array',
       'tag_id.*'          => 'nullable|string|distinct',
       'features'          => 'nullable|array',
@@ -401,30 +362,6 @@ class ProductController extends Controller
       $product->Subcategories()->sync($subcategories);
     }
 
-    // dynamic subject entry
-    if ($request->input('subject_id') && !Subject::find($request->input('subject_id'))) {
-      $newSubject = Subject::create([
-        'name' => $request->input('subject_id'),
-      ]);
-      $request->subject_id = $newSubject->id;
-    }
-
-    // dynamic format entry
-    if ($request->input('format_id') && !Format::find($request->input('format_id'))) {
-      $newFormat = Format::create([
-        'name' => $request->input('format_id'),
-      ]);
-      $request->format_id = $newFormat->id;
-    }
-
-    // dynamic language entry
-    if ($request->input('language_id') && !Language::find($request->input('language_id'))) {
-      $newLanguage = Language::create([
-        'name' => $request->input('language_id'),
-      ]);
-      $request->language_id = $newLanguage->id;
-    }
-
     $keyWords = null;
     if ($request->input('seo_key_word')) {
       foreach ($request->input('seo_key_word') as $keyWord) {
@@ -460,10 +397,6 @@ class ProductController extends Controller
       'discount'          => $request->input('discount'),
       'short_description' => $request->input('short_description'),
       'full_description'  => $request->input('full_description'),
-
-      'format_id'      => $request->format_id,
-      'language_id'    => $request->language_id,
-      'subject_id'     => $request->subject_id,
       'sku'            => $request->input('sku'),
       'seo_key_word'   => rtrim($request->seo_key_word, ','),
     ]);

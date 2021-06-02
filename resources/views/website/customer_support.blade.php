@@ -24,29 +24,29 @@
 
           <div class="contact-rich">
             <h3 class="mb-4">information</h3>
-            @if($companyInfo->location)
+            @if(companyInfo()->location)
             <div class="block d-flex align-items-center">
               <div class="icon pr-4 text-black-50"><i class="ion-ios-location" style="font-size: 26px"></i></div>
-              <div class="data">{{ $companyInfo->location }}</div>
+              <div class="data">{{ companyInfo()->location }}</div>
             </div>
             <hr>
             @endif
-            @if($companyInfo->mobile1)
+            @if(companyInfo()->mobile1)
             <div class="block d-flex align-items-center">
               <div class="icon pr-4 text-black-50"><i class="ion-android-call" style="font-size: 26px"></i></div>
               <div class="data">
                 Call us:<br>
-                <a href="tel: +88 12 345 6789"> {{$companyInfo->mobile1}}</a>
+                <a href="tel: +88 12 345 6789"> {{companyInfo()->mobile1}}</a>
               </div>
             </div>
             <hr>
             @endif
-            @if($companyInfo->email)
+            @if(companyInfo()->email)
             <div class="block d-flex align-items-center">
               <div class="icon pr-4 text-black-50"><i class="ion-email" style="font-size: 26px"></i></div>
               <div class="data email">
                 Email us:<br>
-                <a href="mailto:demo@posthemes.com">{{ $companyInfo->email }}</a>
+                <a href="mailto:demo@posthemes.com">{{ companyInfo()->email }}</a>
               </div>
             </div>
             @endif

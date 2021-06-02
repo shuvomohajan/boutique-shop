@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ $companyInfo->name }}</title>
+  <title>{{ companyInfo()->name }}</title>
 
   <link rel="stylesheet" href="{{ asset('css/visitor.css') }}">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -18,6 +18,7 @@
 </head>
 
 <body>
+@php($categories = \App\Model\Category::where('status', 1)->get())
 <header class="header-3 bg-midnight">
   <!-- Begin Header Top Area -->
   <div class="header-top">
@@ -28,11 +29,11 @@
           <div class="col-lg-5">
             <div class="fb-contact-info pt-sm-10 pt-xs-10 pb-sm-10 pb-xs-10">
               <ul>
-                @if(isset($companyInfo->mobile1))
-                  <li class="phone"><span>Mobile: </span><a href="callto://+123123321345">{{ $companyInfo->mobile1 }} {{ $companyInfo->mobile2 ? ', ' . $companyInfo->mobile2 : null }}</a></li>
+                @if(isset(companyInfo()->mobile1))
+                  <li class="phone"><span>Mobile: </span><a href="callto://+123123321345">{{ companyInfo()->mobile1 }} {{ companyInfo()->mobile2 ? ', ' . companyInfo()->mobile2 : null }}</a></li>
                 @endif
-                @if(isset($companyInfo->email))
-                  <li class="email"><span>Email: </span><a href="mailto://info@yourdomain.com">{{ $companyInfo->email }}</a></li>
+                @if(isset(companyInfo()->email))
+                  <li class="email"><span>Email: </span><a href="mailto://info@yourdomain.com">{{ companyInfo()->email }}</a></li>
                 @endif
               </ul>
             </div>
@@ -93,10 +94,10 @@
         <div class="col-lg-3">
           <div class="logo">
             <a href="{{ url('/') }}">
-              @if(isset($companyInfo->logo))
-              <img src="{{asset('storage/' . $companyInfo->logo )}}" alt="{{ $companyInfo->name }}">
+              @if(isset(companyInfo()->logo))
+              <img src="{{asset('storage/' . companyInfo()->logo )}}" alt="{{ companyInfo()->name }}">
               @else
-              <h4 class="text-white">{{ $companyInfo->name }}</h4>
+              <h4 class="text-white">{{ companyInfo()->name }}</h4>
               @endif
             </a>
           </div>
@@ -174,9 +175,7 @@
                 <a href="javascript:">Category</a>
                 <ul class="megamenu">
                   @foreach ($categories->take(39)->chunk(8) as $categoriesChunk)
-                    @php
-                      $lastItem = $loop->last ? true : false;
-                    @endphp
+                    @php($lastItem = $loop->last ? true : false)
                     <li>
                       @foreach ($categoriesChunk as $category)
                         <ul>
@@ -190,7 +189,6 @@
                             <li><a href="{{ route('all.products', ['category', $category->id]) }}">{{ $category->name }}</a></li>
                           @endif
                         </ul>
-
                       @endforeach
                     </li>
                   @endforeach
@@ -298,41 +296,41 @@
           <div class="col-md-4">
             <div class="footer-widget-logo pt-30 mb-20 pt-sm-5 pt-xs-5">
               <a href="{{ url('/') }}">
-                @if($companyInfo->footer_logo)
-                  <img src="{{ asset('storage/' . $companyInfo->footer_logo) }}" alt="{{ $companyInfo->name }}">
+                @if(companyInfo()->footer_logo)
+                  <img src="{{ asset('storage/' . companyInfo()->footer_logo) }}" alt="{{ companyInfo()->name }}">
                 @else
-                  <h4>{{ $companyInfo->name }}</h4>
+                  <h4>{{ companyInfo()->name }}</h4>
                 @endif
               </a>
             </div>
             <div class="footer-widget-info">
-              <p class="footer-widget_short-desc">{{ $companyInfo->about_footer }}</p>
+              <p class="footer-widget_short-desc">{{ companyInfo()->about_footer }}</p>
               <div class="footer-widget-social-link footer-widget-social-link-3">
                 <ul class="social-link">
-                  @if(isset($companyInfo->facebook))
+                  @if(isset(companyInfo()->facebook))
                     <li class="facebook">
-                      <a href="{{ $companyInfo->facebook }}" data-toggle="tooltip" target="_blank" title="Facebook">
+                      <a href="{{ companyInfo()->facebook }}" data-toggle="tooltip" target="_blank" title="Facebook">
                         <i class="fa fa-facebook"></i>
                       </a>
                     </li>
                   @endif
-                  @if(isset($companyInfo->twitter))
+                  @if(isset(companyInfo()->twitter))
                     <li class="twitter">
-                      <a href="{{ $companyInfo->twitter }}" data-toggle="tooltip" target="_blank" title="Twitter">
+                      <a href="{{ companyInfo()->twitter }}" data-toggle="tooltip" target="_blank" title="Twitter">
                         <i class="fa fa-twitter"></i>
                       </a>
                     </li>
                   @endif
-                  @if(isset($companyInfo->whatsapp))
+                  @if(isset(companyInfo()->whatsapp))
                     <li class="youtube">
-                      <a href="{{ $companyInfo->whatsapp }}" data-toggle="tooltip" target="_blank" title="Youtube">
+                      <a href="{{ companyInfo()->whatsapp }}" data-toggle="tooltip" target="_blank" title="Youtube">
                         <i class="fa fa-whatsapp"></i>
                       </a>
                     </li>
                   @endif
-                  @if(isset($companyInfo->instagram))
+                  @if(isset(companyInfo()->instagram))
                     <li class="instagram">
-                      <a href="{{ $companyInfo->instagram }}" data-toggle="tooltip" target="_blank" title="Instagram">
+                      <a href="{{ companyInfo()->instagram }}" data-toggle="tooltip" target="_blank" title="Instagram">
                         <i class="fa fa-instagram"></i>
                       </a>
                     </li>
@@ -355,7 +353,7 @@
         <!-- Begin Copyright Area -->
         <div class="col-lg-6 col-md-6">
           <div class="copyright copyright-3">
-            <span>Copyright &copy; 2021 <a href="{{ url('/') }}">{{ $companyInfo->name }}.</a> All rights reserved.</span>
+            <span>Copyright &copy; 2021 <a href="{{ url('/') }}">{{ companyInfo()->name }}.</a> All rights reserved.</span>
           </div>
         </div>
       </div>

@@ -225,8 +225,8 @@ $days = 7;
       let sliderRange = $("#slider-range");
       sliderRange.slider({
         range: true,
-        min: {{ $minPrice }},
-        max: {{ $maxPrice }},
+        min: {{ minPrice() }},
+        max: {{ maxPrice() }},
         values: [ {{ $newMinPrice }}, {{ $newMaxPrice }} ],
         slide: function (event, ui) {
           $("#amount").val("৳" + ui.values[0] + "- ৳" + ui.values[1]);

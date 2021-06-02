@@ -26,12 +26,6 @@ class CreateProductsTable extends Migration
             $table->string('sku')->nullable();
             $table->string('year')->nullable();
             $table->integer('page')->nullable();
-            $table->unsignedBigInteger('subject_id')->nullable();
-            $table->foreign('subject_id')->references('id')->on('subjects');
-            $table->unsignedBigInteger('format_id')->nullable();
-            $table->foreign('format_id')->references('id')->on('formats');
-            $table->unsignedBigInteger('language_id')->nullable();
-            $table->foreign('language_id')->references('id')->on('languages');
             $table->string('image')->nullable();
             $table->text('gallery')->nullable();
             $table->string('social_image')->nullable();

@@ -36,8 +36,8 @@
                     </div>--}}
                     <div class="col-lg-12">
                         <div class="about-content">
-                            <h2>WELCOME TO <span>{{ $companyInfo->name }}</span></h2>
-                            <p>{{ $companyInfo->about }}</p>
+                            <h2>WELCOME TO <span>{{ companyInfo()->name }}</span></h2>
+                            <p>{{ companyInfo()->about }}</p>
                             <a href="{{ url('/') }}" class="fb-btn">
                                 <span>SHOP NOW</span>
                             </a>
