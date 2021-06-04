@@ -16,7 +16,7 @@ class CustomerSupportController extends Controller
      */
     public function index()
     {
-      $this->checkPermission(['admin','customer_service.all','customer_service.view']);
+      $this->checkPermission(['admin','customer_support.all','customer_service.view','customer_service.delete']);
       $customer_supports = CustomerSupport::all();
       return view('admin.customer_support.index', compact('customer_supports'));
     }

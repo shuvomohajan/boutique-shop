@@ -25,8 +25,10 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
             $table->longText('about')->nullable();
-            $table->string('type');
             $table->boolean('status')->default(true);
+
+            $table->string('otp_number')->nullable();
+            $table->boolean('otp_status')->default(0);
 
             $table->rememberToken();
             $table->timestamps();

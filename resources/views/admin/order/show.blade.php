@@ -117,12 +117,9 @@
             <td>
               <div class="input-group" >
                 <select class="custom-select " id="inputGroupSelect04" onchange="statusChange({{ $orderProduct->id}},{{ $orderProduct->qty }})"
-                @php
-                    $auth=Auth::user()->type;
-                @endphp
-                  @if ($auth == 'user'||$auth == 'tailor')
-                  disabled
-                  @endif
+                  @cannot ('order.edit')
+                    disabled
+                  @endcannot
                   >
                   <option value="0" {{$orderProduct->return_status == 0 ? 'selected': '' }} {{ $orderProduct->return_status == (1||2) ? 'disabled':'' }}>Start Returnig</option>
                   <option value="1" {{$orderProduct->return_status == 1 ? 'selected': '' }} {{ $orderProduct->return_status == 2 ? 'disabled':'' }}>Processing</option>

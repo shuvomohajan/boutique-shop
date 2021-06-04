@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
    */
   public function index()
   {
-    $this->checkPermission(['admin', 'user.all', 'user.view', 'user.edit', 'user.delete', 'publisher.all', 'publisher.edit', 'publisher.view', 'publisher.delete', 'author.all', 'author.edit', 'author.view', 'author.delete']);
+    $this->checkPermission(['admin', 'user.all', 'user.add', 'user.view', 'user.edit', 'user.delete']);
     $users = User::all();
     return response()->view('admin.userManagement.index', compact('users'));
   }
@@ -30,12 +31,10 @@ class UserController extends Controller
    */
   public function create()
   {
-    $this->checkPermission(['admin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
-    $type = request()->input('type') ?? 'user';
-    if ($type === 'tailor' || $type === 'user') {
-      return response()->view('admin.userManagement.create', compact('type'));
-    }
-    abort(404);
+    $this->checkPermission(['admin', 'user.all', 'user.add']);
+
+    $roles = Role::get()->except([1]);
+    return response()->view('admin.userManagement.create', compact('roles'));
   }
 
   /**
@@ -46,7 +45,7 @@ class UserController extends Controller
    */
   public function store(Request $request)
   {
-    $this->checkPermission(['admin', 'user.all', 'user.add', 'author.all', 'publisher.all', 'publisher.add', 'author.add']);
+    $this->checkPermission(['admin', 'user.all', 'user.add']);
     $request->validate([
       'name'        => 'required|max:255',
       'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -57,7 +56,6 @@ class UserController extends Controller
       'phone'       => 'nullable',
       'about'       => 'nullable',
       'status'      => 'required',
-      'type'        => 'required',
     ]);
 
     $fileUrl = null;
@@ -72,7 +70,7 @@ class UserController extends Controller
       $fileUrlCoverImage = $request->cover_image->storeAs('images/users', $fileUrlCoverImage, 'public');
     }
 
-    User::create([
+    $user = User::create([
       'name'        => $request->input('name'),
       'email'       => $request->input('email'),
       'password'    => Hash::make($request->input('password')),
@@ -84,6 +82,8 @@ class UserController extends Controller
       'type'        => $request->input('type'),
       'status'      => $request->input('status'),
     ]);
+
+    $user->syncRoles($request->input('role_id'));
 
     $message = 'User Created Successfully';
     return back()->with('Smsg', $message);
@@ -108,8 +108,9 @@ class UserController extends Controller
    */
   public function edit(User $user)
   {
-    $this->checkPermission(['admin', 'user.all', 'user.edit', 'author.all', 'publisher.all', 'publisher.edit', 'author.edit']);
-    return response()->view('admin.userManagement.edit', compact('user'));
+    $this->checkPermission(['admin', 'user.all', 'user.edit']);
+    $roles = Role::get()->except([1]);
+    return response()->view('admin.userManagement.edit', compact('user', 'roles'));
   }
 
   /**
@@ -121,7 +122,7 @@ class UserController extends Controller
    */
   public function update(Request $request, User $user)
   {
-    $this->checkPermission(['admin', 'user.all', 'user.edit', 'author.all', 'publisher.all', 'publisher.edit', 'author.edit']);
+    $this->checkPermission(['admin', 'user.all', 'user.edit']);
     $request->validate([
       'name'        => 'required|max:255',
       'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:512',
@@ -132,7 +133,6 @@ class UserController extends Controller
       'phone'       => 'nullable',
       'about'       => 'nullable',
       'status'      => 'required',
-      'type'        => 'required',
     ]);
 
     $fileUrl = $user->image;
@@ -172,6 +172,8 @@ class UserController extends Controller
       'status'      => $request->input('status'),
     ]);
 
+    $user->syncRoles($request->input('role_id'));
+
     $message = 'User Updated Successfully';
     return back()->with('Smsg', $message);
   }
@@ -185,7 +187,7 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    $this->checkPermission(['admin', 'user.all', 'user.delete', 'author.delete', 'publisher.all', 'publisher.delete', 'author.delete']);
+    $this->checkPermission(['admin', 'user.all', 'user.delete']);
     $filePath = 'storage/' . $user->image;
     if (File::exists($filePath)) {
       File::delete($filePath);

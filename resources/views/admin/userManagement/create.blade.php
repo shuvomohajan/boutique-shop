@@ -28,7 +28,7 @@
               </span>
             </span>
             <h3 class="kt-portlet__head-title">
-              Add New {{ ucfirst($type) }}
+              Add New User
             </h3>
           </div>
         </div>
@@ -36,7 +36,6 @@
 
         <form class="kt-form kt-form--label-right" enctype="multipart/form-data" method="POST" action="{{route('user.store')}}">
           @csrf
-          <input type="hidden" name="type" value="{{ $type }}">
           <div class="kt-portlet__body">
             <div class="form-group row">
               <div class="col-lg-2"></div>
@@ -82,6 +81,21 @@
                 <label for="password_confirmation" class=""><b>{{__('Confirm Password')}} <span class="text-danger">*</span></b></label>
                 <input name="password_confirmation" id="password_confirmation" placeholder="Ex: " type="password" class="form-control  @error('password_confirmation') is-invalid @enderror">
                 <span class="form-text text-muted">Please enter the confirmation password.</span>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="offset-lg-2 col-lg-8">
+                <label for="role_id"><b>{{__('Assign Role')}} <span class="text-danger">*</span></b></label>
+                <select class="form-control select2" id="role_id" name="role_id" value="{{ old('role_id') }}">
+                  <option value=""></option>
+                  @foreach ($roles as $role)
+                  <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : null }}>{{ $role->name }}</option>
+                  @endforeach
+                </select>
+                @error('role_id')
+                <span class="text-danger"><strong>{{ $message }}</strong></span>
+                @enderror
               </div>
             </div>
 

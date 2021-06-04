@@ -22,7 +22,7 @@
     <div id="kt_aside_menu" class="kt-aside-menu" data-ktmenu-vertical="1" data-ktmenu-scroll="1"
          data-ktmenu-dropdown-timeout="500">
       <ul class="kt-menu__nav">
-        @if (Auth::user()->type != 'user')
+        @if (!auth()->user()->hasRole('Customer'))
 
           <li class="kt-menu__item" id="db" aria-haspopup="true">
             <a href="{{ route('dashboard') }}" class="kt-menu__link"><i
@@ -64,12 +64,12 @@
                 @canany(['admin','user.all','user.create'])
 
                   <li class="kt-menu__item kt-menu__item" aria-haspopup="true">
-                    <a href="{{ route('user.create', ['type' => 'tailor']) }}" class="kt-menu__link">
+                    <a href="{{ route('user.create') }}" class="kt-menu__link">
                       <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                         <span></span>
                       </i>
                       <span
-                        class="kt-menu__link-text">Add New Tailor</span>
+                        class="kt-menu__link-text">Add New User</span>
                     </a>
                   </li>
                 @endcanany
@@ -273,7 +273,7 @@
             </a>
           </li>
         @endcanany
-        @canany(['admin','order.all'])
+        @canany(['admin','order.all','order.add','order.edit','order.delete','order.view'])
           <li class="kt-menu__item" aria-haspopup="true">
             <a href="{{ route('order.index') }}" class="kt-menu__link"><i
                 class="kt-menu__link-icon fas fa-truck"></i>
@@ -409,13 +409,10 @@
             </ul>
           </div>
         </li>
-        @php
-          $auth = Auth::user()->type;
-        @endphp
 
-        @if ( $auth == 'user' || $auth == 'tailor')
+        @if (auth()->user()->hasRole('Customer'))
           <li class="kt-menu__item {{ request()->is('dashboard/order*') ? 'kt-menu__item--active' : null }}" aria-haspopup="true">
-            <a href="{{ route('user.orders',Auth::id()) }}" class="kt-menu__link"><i
+            <a href="{{ route('user.orders', Auth::id()) }}" class="kt-menu__link"><i
                 class="kt-menu__link-icon fas fa-truck"></i>
               <span
                 class="kt-menu__link-text">User Orders</span>

@@ -108,12 +108,10 @@
 
               <div class="input-group">
                 <select class="custom-select status-{{ $order->id }}" id="inputGroupSelect04" onchange="statusChange({{ $order->id }})"
-                  @php
-                      $auth = Auth::user()->type;
-                  @endphp
-                  @if ($auth == 'user'||$auth == 'tailor')
+
+                  @cannot ('order.edit')
                     disabled
-                  @endif
+                  @endcannot
                   >
                   <option value="0" {{ $order->order_status == 0 ? 'selected': '' }}>Processing</option>
                   <option value="1" {{ $order->order_status == 1 ? 'selected': '' }}>Ready</option>

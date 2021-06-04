@@ -86,6 +86,23 @@
               </div>
             </div>
 
+            @if($user->id != 1)
+              <div class="form-group row">
+                <div class="offset-lg-2 col-lg-8">
+                  <label for="role_id"><b>{{__('Assign Role')}}</b></label>
+                  <select class="form-control select2" id="role_id" name="role_id">
+                    <option value=""></option>
+                    @foreach ($roles as $role)
+                      <option value="{{ $role->id }}" {{ collect($user->getRoleNames())->contains($role->name) ? 'selected' : null }}>{{ $role->name }}</option>
+                    @endforeach
+                  </select>
+                  @error('role_id')
+                  <span class="text-danger"><strong>{{ $message }}</strong></span>
+                  @enderror
+                </div>
+              </div>
+            @endif
+
             <div class="form-group row">
               <div class="col-lg-2"></div>
               <div class="col-lg-8">
