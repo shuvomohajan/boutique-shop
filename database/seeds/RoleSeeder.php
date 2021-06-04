@@ -21,5 +21,15 @@ class RoleSeeder extends Seeder
     $role->syncPermissions($permission);
     $admin = User::find(1);
     $admin->syncRoles($role);
+
+    Role::create([
+      'name' => 'Manager'
+    ]);
+    Role::create([
+      'name' => 'Tailor'
+    ]);
+    Role::create([
+      'name' => 'Customer'
+    ]);
   }
 }
