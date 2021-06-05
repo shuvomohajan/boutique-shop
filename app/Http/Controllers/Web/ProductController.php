@@ -37,14 +37,8 @@ class ProductController extends Controller
     if (request()->has('categories')) {
       $category_id = request()->get('categories');
     }
-    if (request()->has('languages')) {
-      $language_id = request()->get('languages');
-    }
     //filtering end
-
-    if ($for === 'publisher' || $for === 'author') {
-      $item = User::where(['id' => $id, 'type' => $for])->first();
-    } elseif ($for === 'category') {
+if ($for === 'category') {
       $item = Category::findOrFail($id);
       $item->type = 'category';
     } elseif ($for === 'subject') {
@@ -60,9 +54,6 @@ class ProductController extends Controller
       $products = Product::join('category_product', 'category_product.product_id', '=', 'products.id')->where('category_product.category_id', $id)
         ->when(request()->has('subcategories'), function ($query) use ($subProducts) {
           return Product::whereIn('id', $subProducts);
-        })
-        ->when(request()->has('languages'), function ($query) use ($language_id) {
-          return $query->whereIn('language_id', $language_id);
         })
         ->when(request()->has('sort'), function ($query) {
           if (request()->get('sort') == 'asc' || request()->get('sort') == 'desc') {
@@ -81,9 +72,6 @@ class ProductController extends Controller
         ->when(request()->has('categories'), function ($query) use ($category_id) {
           return $query->join('category_product', 'category_product.product_id', '=', 'products.id')->whereIn('category_product.category_id', $category_id);
         })
-        ->when(request()->has('languages'), function ($query) use ($language_id) {
-          return $query->whereIn('language_id', $language_id);
-        })
         ->when(request()->has('sort'), function ($query) {
           if (request()->get('sort') == 'asc' || request()->get('sort') == 'desc') {
             return $query->orderBy('regular_price', request()->get('sort'));
@@ -96,9 +84,6 @@ class ProductController extends Controller
         })
         ->paginate(15);
     }
-
-    // dd($item);
-
 
     return view('website.shop_left_sidebar', compact('products', 'item', 'category_id', 'subcategory_id', 'language_id', 'newMinPrice', 'newMaxPrice'));
   }
