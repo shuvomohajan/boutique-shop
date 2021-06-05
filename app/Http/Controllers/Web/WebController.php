@@ -2,47 +2,66 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\User;
-use App\Model\Post;
-use App\Model\Banner;
-use App\Model\Slider;
-use App\Model\BlogTag;
-use App\Model\Feature;
-use App\Model\Product;
-use App\Model\Category;
-use App\Model\Division;
-use App\Model\PostCategory;
-use Illuminate\Http\Request;
-use App\Model\CustomerSupport;
-use App\Model\FeatureCategory;
 use App\Http\Controllers\Controller;
+use App\Model\Banner;
+use App\Model\BlogTag;
+use App\Model\Category;
 use App\Model\CategorySection;
+use App\Model\CustomerSupport;
+use App\Model\Division;
+use App\Model\Feature;
+use App\Model\FeatureCategory;
+use App\Model\Post;
+use App\Model\PostCategory;
+use App\Model\Product;
+use App\Model\Slider;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class WebController extends Controller
 {
+  public function otpVerification()
+  {
+    return view('auth.otp_verification');
+  }
+
+  public function otpVerificationStore(Request $request)
+  {
+    if ($request->input('otp_number')) {
+      if (auth()->user()->otp_number == $request->input('otp_number')) {
+        $user = Auth::user();
+        $user->otp_status = 1;
+        $user->save();
+        return redirect()->route('dashboard');
+      }
+      return back()->with('error', 'Code not matched.');
+    }
+  }
+
   public function index()
   {
     $data['products'] = Product::where('status', 1)->get();
-    $data['cat_section1'] = CategorySection::where('status', 1)->where('section_position',1)->first();
-    $data['cat_section2'] = CategorySection::where('status', 1)->where('section_position',2)->first();
-    $data['cat_section3'] = CategorySection::where('status', 1)->where('section_position',3)->first();
-    $data['cat_section4'] = CategorySection::where('status', 1)->where('section_position',4)->first();
-    $data['cat_section5'] = CategorySection::where('status', 1)->where('section_position',5)->first();
-    $data['cat_section6'] = CategorySection::where('status', 1)->where('section_position',6)->first();
-    $data['cat_section7'] = CategorySection::where('status', 1)->where('section_position',7)->first();
+    $data['cat_section1'] = CategorySection::where('status', 1)->where('section_position', 1)->first();
+    $data['cat_section2'] = CategorySection::where('status', 1)->where('section_position', 2)->first();
+    $data['cat_section3'] = CategorySection::where('status', 1)->where('section_position', 3)->first();
+    $data['cat_section4'] = CategorySection::where('status', 1)->where('section_position', 4)->first();
+    $data['cat_section5'] = CategorySection::where('status', 1)->where('section_position', 5)->first();
+    $data['cat_section6'] = CategorySection::where('status', 1)->where('section_position', 6)->first();
+    $data['cat_section7'] = CategorySection::where('status', 1)->where('section_position', 7)->first();
     $data['random'] = Product::where('status', 1)->inRandomOrder()->get();
     $data['features'] = Feature::where('status', 1)->orderBy('priority', 'asc')->get();
     $data['featureCategories'] = FeatureCategory::where('status', 1)->take(3)->get();
     $data['sliders'] = Slider::where('status', 1)->get();
     $data['banner'] = Banner::first();
     $data['topsales'] = Product::with('Reviews')
-    ->leftJoin('order_products','products.id','=','order_products.product_id')
-    ->selectRaw('products.*, COALESCE(sum(order_products.qty),0) total')
-    ->groupBy('products.id')
-    ->orderBy('total','desc')
-    ->take(5)
-    ->get();
+      ->leftJoin('order_products', 'products.id', '=', 'order_products.product_id')
+      ->selectRaw('products.*, COALESCE(sum(order_products.qty),0) total')
+      ->groupBy('products.id')
+      ->orderBy('total', 'desc')
+      ->take(5)
+      ->get();
     return view('website.home', $data);
   }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -76,4 +77,23 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+  protected function registered(Request $request, $user)
+  {
+    $number = '88' . $request->input('phone');
+    $otp_number = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+    $message = urlencode("Verification code is " . $otp_number);
+
+    $url = "http://sms.myserver.com.bd/smsapi/non-masking?api_key=$2y$10$9xEtheRb3S0MB71pN2GX8egs32VagnecpcR3FHSSffBjlFqpWA.6u&smsType=text&mobileNo=" . $number . "&smsContent=" . $message;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_exec($ch);
+    curl_close($ch);
+
+    $user->phone = $number;
+    $user->otp_number = $otp_number;
+    $user->save();
+    return redirect()->route('otp_verification');
+  }
 }

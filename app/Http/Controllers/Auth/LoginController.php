@@ -40,23 +40,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function attemptLogin(Request $request)
-    {
-        if(is_numeric($request->get('email'))){
-            $user = User::where('phone', $request->get('email'))->first();
-        }elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
-            $user = User::where('email', $request->get('email'))->first();
-        }
-
-        if($user && $user->hasRole('Customer') && $user->otp_status == 0) {
-            dd('not verified');
-        }
-
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
-        );
-    }
-
     protected function credentials(Request $request)
     {
       if(is_numeric($request->get('email'))){

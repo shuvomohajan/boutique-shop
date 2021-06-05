@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Dashboard routes
-Route::namespace('Admin')->prefix('dashboard')->middleware('auth')->group(function () {
+Route::namespace('Admin')->prefix('dashboard')->middleware(['auth', 'otp_verification'])->group(function () {
   Route::resource('tag', 'TagController');
   Route::resource('user', 'UserController');
   Route::resource('format', 'FormatController');
@@ -82,6 +82,10 @@ Route::namespace('Web')->middleware('web')->group(function () {
   Route::middleware('auth')->group(function () {
     Route::get('checkout', 'WebController@Checkout')->name('checkout');
   });
+
+
+  Route::get('otp_verification', 'WebController@otpVerification')->name('otp_verification');
+  Route::post('otp_verification', 'WebController@otpVerificationStore')->name('otp_verification.store');
 
   Route::get('/', 'WebController@index');
   Route::resource('cash', 'CashController');
