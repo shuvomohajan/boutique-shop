@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name'              => 'Admin',
-            'type'              => 'admin',
             'email'             => 'admin@gmail.com',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'password'          => Hash::make('password'),
