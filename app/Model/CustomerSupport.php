@@ -10,6 +10,7 @@ class CustomerSupport extends Model
       'name',
       'email',
       'service',
+      'address',
       'message'
     ];
 }

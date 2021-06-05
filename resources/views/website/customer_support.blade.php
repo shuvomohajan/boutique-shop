@@ -60,6 +60,9 @@
                 <form action="{{ route('support.create') }}" method="post">
                   @csrf
                   <section class="form-fields ">
+                    @if (session()->has('message'))
+                        <p class="alert alert-success">{{ session()->get('message') }}</p>
+                        @endif
                     <div class="form-group row">
                       <div class="col-md-9 col-md-offset-3">
                         <h3>Customer Support</h3>
@@ -93,6 +96,16 @@
                       <div class="col-md-6">
                         <input class="form-control" name="email" id="email" type="email" value="{{ old('email') }}" placeholder="your@email.com">
                         @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label text-right" for="address">Address</label>
+                      <div class="col-md-6">
+                        <input class="form-control" name="address" id="address" type="text" value="{{ old('address') }}" placeholder="your location, Bangladesh">
+                        @error('address')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>

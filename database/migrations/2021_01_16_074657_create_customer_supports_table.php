@@ -18,6 +18,7 @@ class CreateCustomerSupportsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->integer('service');
+            $table->string('address')->nullable();
             $table->text('message');
             $table->timestamps();
         });

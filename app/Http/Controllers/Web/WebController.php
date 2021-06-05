@@ -136,6 +136,7 @@ class WebController extends Controller
       'name'    => 'required|max:255',
       'email'   => 'required|email',
       'service' => 'required|integer',
+      'address' => 'nullable|string',
       'message' => 'required|max:255',
     ]);
 
@@ -143,10 +144,11 @@ class WebController extends Controller
       'name'    => $request->input('name'),
       'email'   => $request->input('email'),
       'service' => $request->input('service'),
+      'address' => $request->input('address'),
       'message' => $request->input('message'),
     ]);
 
-    return view('website.customer_support')->with('message', 'Message Send Successfully.');
+    return back()->with('message', 'Message Send Successfully.');
   }
 
   public function all_posts_with_tag($id)
