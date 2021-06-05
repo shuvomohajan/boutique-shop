@@ -91,7 +91,7 @@ class RegisterController extends Controller
     curl_exec($ch);
     curl_close($ch);
 
-    $user->phone = $number;
+    $user->phone = $request->input('phone');
     $user->otp_number = $otp_number;
     $user->save();
     return redirect()->route('otp_verification');
