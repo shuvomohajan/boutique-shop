@@ -59,10 +59,10 @@ class ProductController extends Controller
     $this->checkPermission(['admin', 'product.all', 'product.add']);
     // dd($request->all());
     $request->validate([
-      'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:512',
+      'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
       'gallery'           => 'nullable|array',
-      'gallery.*'         => 'nullable|image|mimes:jpeg,png,jpg|max:512',
-      'social_image'      => 'nullable|image|mimes:jpeg,png,jpg|max:512',
+      'gallery.*'         => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+      'social_image'      => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
       'name'              => 'required|string|max:255',
       'short_description' => 'nullable|string',
       'full_description'  => 'nullable|string',
@@ -238,10 +238,10 @@ class ProductController extends Controller
   {
     $this->checkPermission(['admin', 'product.all', 'product.edit']);
     $request->validate([
-      'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:512',
+      'image'             => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
       'gallery'           => 'nullable|array',
-      'gallery.*'         => 'nullable|image|mimes:jpeg,png,jpg|max:512',
-      'social_image'      => 'nullable|image|mimes:jpeg,png,jpg|max:512',
+      'gallery.*'         => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+      'social_image'      => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
       'name'              => 'required|string|max:255',
       'short_description' => 'nullable|string',
       'full_description'  => 'nullable|string',

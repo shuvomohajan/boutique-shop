@@ -86,7 +86,7 @@
             <div class="form-group row">
               <div class="col-lg-12">
                 <label for="category_id"><b>{{__('product Category')}}</b></label>
-                <select class="form-control select2-withTag" multiple name="category_id[]" value="{{ old('category_id') ?? $product->Categories }}" id="category_id" onchange="subcategoryFunction()">
+                <select class="form-control select2-withTag" multiple name="category_id[]" id="category_id" onchange="subcategoryFunction()">
                   <option value="">-- Select product Category --</option>
                   @foreach ($categories as $category)
                   <option value="{{ $category->id }}" {{ $product->Categories->contains($category->id) ? 'selected' : null }}>{{ $category->name }}</option>
@@ -104,7 +104,7 @@
             <div class="form-group row">
               <div class="col-lg-12">
                 <label for="subcategory_id"><b>{{__('Sub Category')}} <span class="text-danger">*</span></b></label>
-                <select class="form-control select2-withTag" multiple value="{{ old('subcategory_id') ?? $product->subcategory_id }}" name="subcategory_id[]" value="{{ old('subcategory_id') ?? $product->Subcategories }}" id="subcategory_id">
+                <select class="form-control select2-withTag" multiple name="subcategory_id[]" value="{{ old('subcategory_id') ?? $product->Subcategories }}" id="subcategory_id">
                   @foreach ($product->Subcategories as $oldSubcategory)
                   <option value="{{ $oldSubcategory->id }}" {{ $product->Subcategories->contains($oldSubcategory->id) ? 'selected' : null }}>{{ $oldSubcategory->name }}</option>
                   @endforeach
@@ -150,7 +150,7 @@
             <div class="form-group row">
               <div class="col-lg-12">
                 <label for="tag_id"><b>{{__('Tags')}}</b></label>
-                <select class="form-control select2-withTag" multiple name="tag_id[]" value="{{ old('tag_id') ?? $oldTags }}">
+                <select class="form-control select2-withTag" multiple name="tag_id[]">
                   <option value="">-- Select product Tag --</option>
                   @foreach ($tags as $tag)
                   <option value="{{ $tag->id }}" {{ $oldTags->contains($tag->id) ? 'selected' : null }}>{{ $tag->name }}</option>

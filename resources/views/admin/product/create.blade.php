@@ -95,7 +95,7 @@
             <div class="form-group row">
               <div class="col-lg-12">
                 <label for="subcategory_id"><b>{{__('Sub Category')}} <span class="text-danger">*</span></b></label>
-                <select class="form-control select2-withTag" multiple name="subcategory_id[]" value="{{ old('subcategory_id') }}" id="subcategory_id" disabled="true"></select>
+                <select class="form-control select2-withTag" multiple name="subcategory_id[]" id="subcategory_id" disabled="true"></select>
                 @error('subcategory_id')
                 <span class="text-danger"><strong>{{ $message }}</strong></span>
                 @enderror
@@ -131,7 +131,7 @@
 
             <div class="form-group">
                 <label for="tag_id"><b>{{__('Tags')}}</b></label>
-                <select class="form-control select2-withTag" multiple name="tag_id[]" value="{{ old('tag_id') }}">
+                <select class="form-control select2-withTag" multiple name="tag_id[]">
                   @foreach ($tags as $tag)
                   <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                   @endforeach
