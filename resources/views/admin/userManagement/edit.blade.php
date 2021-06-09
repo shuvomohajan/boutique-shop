@@ -90,8 +90,8 @@
               <div class="form-group row">
                 <div class="offset-lg-2 col-lg-8">
                   <label for="role_id"><b>{{__('Assign Role')}}</b></label>
-                  <select class="form-control select2" id="role_id" name="role_id">
-                    <option value=""></option>
+                  <select class="form-control" id="role_id" name="role_id">
+                    <option value="" disabled> Select Role </option>
                     @foreach ($roles as $role)
                       <option value="{{ $role->id }}" {{ collect($user->getRoleNames())->contains($role->name) ? 'selected' : null }}>{{ $role->name }}</option>
                     @endforeach
@@ -101,6 +101,23 @@
                   @enderror
                 </div>
               </div>
+            @endif
+
+
+            @if($user->hasRole('Tailor'))
+            <div class="form-group row" id="experience_box">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-8">
+                <label for="experience" class=""><b>{{__('Experience')}}</b></label>
+                <input name="experience" id="experience" value="{{old('experience', $user->experience)}}" placeholder="4 years" type="text" class="form-control  @error('experience') is-invalid @enderror">
+                @error('experience')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+                <span class="form-text text-muted">Please enter the phone number.</span>
+              </div>
+            </div>
             @endif
 
             <div class="form-group row">
@@ -265,3 +282,14 @@
     }
 </script>
 @endsection
+@push('script')
+  <script>
+    $('#role_id').change(function () {
+      if($(this).val() == 3) {
+        $('#experience_box').show();
+      }else {
+        $('#experience_box').hide();
+      }
+    });
+  </script>
+@endpush

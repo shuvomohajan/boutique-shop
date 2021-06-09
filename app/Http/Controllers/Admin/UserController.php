@@ -56,6 +56,7 @@ class UserController extends Controller
       'phone'       => 'nullable',
       'about'       => 'nullable',
       'status'      => 'required',
+      'experience'  => 'nullable',
     ]);
 
     $fileUrl = null;
@@ -81,6 +82,7 @@ class UserController extends Controller
       'about'       => $request->input('about'),
       'type'        => $request->input('type'),
       'status'      => $request->input('status'),
+      'experience'  => $request->input('experience'),
     ]);
 
     $user->syncRoles($request->input('role_id'));
@@ -133,6 +135,7 @@ class UserController extends Controller
       'phone'       => 'nullable',
       'about'       => 'nullable',
       'status'      => 'required',
+      'experience'  => 'nullable',
     ]);
 
     $fileUrl = $user->image;
@@ -170,6 +173,7 @@ class UserController extends Controller
       'about'       => $request->input('about'),
       'type'        => $request->input('type'),
       'status'      => $request->input('status'),
+      'experience'  => $request->input('experience'),
     ]);
 
     $user->syncRoles($request->input('role_id'));

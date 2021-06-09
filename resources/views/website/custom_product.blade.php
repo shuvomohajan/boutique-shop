@@ -18,7 +18,7 @@
   <section class="content-wraper" style="margin-bottom: 50px">
     <div class="container">
       <div id="main">
-        <section id="content" class="page-content card card-block">
+        <section id="content" class="page-content card card-block" style="margin-bottom: 30px">
           <section class="p-4">
             <form action="{{ route('custom_product.store') }}" method="post">
               @csrf
@@ -289,6 +289,24 @@
             </form>
           </section>
         </section>
+
+        @if($tailors->count())
+        <div class="card card-block">
+          <div class="card-body">
+            <div class="row">
+              @foreach($tailors as $tailor)
+              <div class="col-md-2">
+                <div>
+                  <img src="{{ asset('storage/'. ($tailor->image ?: 'images/default.png')) }}" alt="{{ $tailor->name }}" style="height: 200px; width: 100%; object-fit: cover">
+                  <h6 class="mt-2">{{ $tailor->name }}</h6>
+                  <p>Experience: {{ $tailor->experience }}</p>
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+        @endif
       </div>
     </div>
   </section>
