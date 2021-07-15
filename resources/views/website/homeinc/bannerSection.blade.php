@@ -19,7 +19,7 @@
                 <!-- Begin Product Image Area -->
                 <div class="product-img">
                   <a href="{{ route('product.details',$product->id) }}"><img class="primary-img" src="{{ asset('storage/' . ($product->image ? $product->image : 'images/default.png')) }}"
-                      alt="FB'S Prduct"></a>
+                      alt="FB'S Prduct" style="height: 333px; width: 100%; object-fit: cover;"></a>
                   @if(Illuminate\Support\Carbon::parse($product->created_at)->diffInDays(Illuminate\Support\Carbon::now()) < $days)<span class="sticker">New</span>@endif
                   @if($product->discount != null)<span class="sticker-2 text-dark">{{ $product->discount }}%</span>@endif
                 </div>
@@ -77,7 +77,7 @@
 
         <!-- Single Product Slide Area End Here -->
         <!-- Begin Slider Area -->
-        <div class="col-lg-6">
+        <div class="col-lg-9">
           <div class="slider-area slider-area-3 pt-sm-30 pt-xs-30">
             <div class="slider-active owl-carousel">
               <!-- Begin Single Slide Area -->
@@ -101,10 +101,8 @@
         </div>
         <!-- Slider Area End Here -->
 
-        <div class="col-lg-3">
+        {{-- <div class="col-lg-3">
           <div class="row">
-            <!-- Begin FB's Banner Area -->
-            {{-- {{ dd($featureCategories->all()) }} --}}
             @foreach ($featureCategories as $featuresCategory)
             <div class="col-lg-12 col-sm-6 p-1">
               <div class="fb-banner fb-img-hover-effect pt-sm-30 pt-xs-30">
@@ -114,9 +112,8 @@
               </div>
             </div>
             @endforeach
-            <!-- FB's Banner Area End Here -->
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
